@@ -6,15 +6,9 @@
 
 -- buffer management 
 -- close tab
-vim.keymap.set('n', '<leader>bc', '<cmd>:tabc<CR>', {desc="[C]lose Buffer"})
+vim.keymap.set('n', '<leader>bd', '<cmd>:bd<CR>', {desc="[D]elete Buffer"})
 -- create new tab
 vim.keymap.set('n', '<leader>bn', '<cmd>:tabnew<CR>', {desc="[N]ew Buffer"})
-
-
-
--- find buffer
-vim.keymap.set('n', '<leader>bf', '<cmd>:Telescope buffers<CR>', {desc="[F]ind [B]uffer"})
-
 -- next buffer
 vim.keymap.set('n', '<Tab>', '<cmd>:BufferLineCycleNext<CR>')
 -- previous buffer
@@ -23,29 +17,72 @@ vim.keymap.set('n', '<S-Tab>', '<cmd>:BufferLineCyclePrev<CR>')
 -- Telescope (find) commands
 -- file finding
 vim.keymap.set('n', '<leader>ff', '<cmd>:Telescope find_files<CR>', {desc="[F]ind [F]iles"} )
+-- grep this
+vim.keymap.set('n', '<leader>fg', '<cmd>:Telescope live_grep<CR>', {desc="[F]ind w/ [G]rep"} )
 -- command finding
 vim.keymap.set('n', '<leader>fc', '<cmd>:Telescope commands<CR>', {desc="[F]ind [C]ommand"} )
 -- manpage finding
 vim.keymap.set('n', '<leader>fm', '<cmd>:Telescope man_pages<CR>', {desc="[F]ind [M]anual"} )
 -- notification finding
-vim.keymap.set('n', '<leader>fm', '<cmd>:Telescope notify<CR>', {desc="[F]ind [N]otification"} )
+vim.keymap.set('n', '<leader>fn', '<cmd>:Telescope notify<CR>', {desc="[F]ind [N]otification"} )
 -- todo finding
 vim.keymap.set('n', '<leader>ft', '<cmd>:TodoTelescope<CR>', {desc="[F]ind [T]odo's"} )
+-- find buffer
+vim.keymap.set('n', '<leader>fb', '<cmd>:Telescope buffers<CR>', {desc="[F]ind [B]uffer"})
+-- help
+vim.keymap.set('n', '<leader>fh', '<cmd>:Telescope help_tags<CR>', {desc="[F]ind [H]elp"} )
+-- previous files
+vim.keymap.set('n', '<leader>fp', '<cmd>:Telescope oldfiles<CR>', {desc="[F]ind [P]revious Files"} )
+
+-- Commands to [S]how a panel (a [s]tretch)
+-- Show todo's in a quick-fix panel
+vim.keymap.set('n', '<leader>st', '<cmd>:TodoQuickFix<CR>', {desc="[S]how [T]odos"} )
+-- show Trouble quickfix list
+vim.keymap.set('n', '<leader>sq', '<cmd>:Trouble qflist toggle<CR>', {desc="[S]how [Q]uickfixes"} )
+-- show trouble diagnostics
+vim.keymap.set('n', '<leader>sd', '<cmd>:Trouble diagnostics toggle<CR>', {desc="[S]how [D]iagnostics"} )
+-- show trouble symbols
+vim.keymap.set('n', '<leader>ss', "<cmd>Trouble symbols toggle focus=false<cr>", {desc="[S]how [S]ymbols"} )
+-- show trouble References
+vim.keymap.set('n', '<leader>sr', "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc="[S]how [R]eferences"} )
+-- show trouble loclist
+vim.keymap.set('n', '<leader>sl', "<cmd>Trouble loclist toggle<cr>", {desc="[S]how [L]ocation list"} )
 
 
+-- Git
+vim.keymap.set('n', '<leader>gs', '<cmd>:Git status<CR>', {desc="[G]it [S]tatus"} )
+vim.keymap.set('n', '<leader>ga', '<cmd>:Git add .<CR>', {desc="[G]it [A]dd ."} )
+
+
+-- TODO: commits w/ user input
 -- Comments ? for some reason API is unneccesarily opaque, not sure how to call this
 -- for now, it has default shortcuts of `gc_`
 -- vim.keymap.set('v', '<leader>/', '?', {desc="Comment selection"} )
 -- vim.keymap.set('n', '<leader>/', '?', {desc="Comment line"} )
 
 
-
 -- aesthetic commands
 -- colorscheme
-vim.keymap.set('n', '<leader>fc', '<cmd>:Telescope colorscheme<CR>', {desc="[A]esthetic [C]olorschemes"} )
+vim.keymap.set('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', {desc="[A]esthetic [C]olorschemes"} )
 
 -- Mason
 vim.keymap.set('n', '<leader>m', '<cmd>:Mason<CR>', {desc="[M]ason"} )
+
+-- Lazy
+vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
+
+
+-- terminal
+vim.keymap.set('n', '<leader>t', '<cmd>:terminal<CR>', {desc="[T]erminal"} )
+
+-- window management
+-- vsplit
+vim.keymap.set('n', '<leader>wv', '<cmd>:vsplit<CR>', {desc="[V]ertical Split"} )
+-- hsplit
+vim.keymap.set('n', '<leader>wh', '<cmd>:split<CR>', {desc="[H]orizontal Split"} )
+-- close window
+vim.keymap.set('n', '<leader>wc', '<cmd>:close<CR>', {desc="[C]lose"} )
+
 
 -- toggle neotree
 vim.keymap.set('n', '<leader>e', function()
@@ -73,11 +110,11 @@ vim.keymap.set('n', '<leader>e', function()
 );
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- REGULAR KEYMAPS --------------------------------------------------
 
--- TODO quick comment toggle
+-- TODO: quick comment toggle
 -- vim.keymap.set('n', '<leader>/', )
 
 -- Save buffer
