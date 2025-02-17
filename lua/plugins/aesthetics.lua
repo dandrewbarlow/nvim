@@ -4,7 +4,7 @@
 -- for the finer things
 
 return {
-  {
+  { -- goated colorscheme
     'Mofiqul/dracula.nvim',
     config = function()
       require('dracula').setup {
@@ -52,6 +52,24 @@ return {
     end
   },
 
+  { -- neoscroll: smooth scrolling
+    "karb94/neoscroll.nvim",
+    config = function ()
+      require('neoscroll').setup({
+        -- options: 
+        ----------------
+        -- linear
+        -- quadratic
+        -- cubic
+        -- quartic
+        -- quintic
+        -- circular
+        -- sine
+        easing = 'cubic'
+      })
+    end
+  },
+
   -- TPope: il papa
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive', -- git utilities
@@ -91,3 +109,20 @@ return {
     end,
   },
 }
+
+
+--[
+--
+--
+--  icons_enabled = true,
+--  theme = 'auto',
+--  component_separators = { left = '', right = ''},
+--  section_separators = { left = '', right = ''},
+--  disabled_filetypes = {
+--    statusline = {},
+--    winbar = {},
+--
+--
+--
+--
+--]

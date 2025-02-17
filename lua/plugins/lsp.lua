@@ -44,9 +44,6 @@ return {
           },
         },
     },
-    config = function()
-      require('lspconfig').lua_ls.setup {}
-    end
   },
 
   { -- Mason: LSP manager
@@ -61,12 +58,35 @@ return {
       config = function()
 
         local handlers = {
+
+          -- general handler
           function (server_name)
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
             require('lspconfig')[server_name].setup {
               capabilities = capabilities
             }
+          end,
+
+          -- custom handlers
+          ['lua_ls'] = function ()
+              local capabilities = require('cmp_nvim_lsp').default_capabilities()
+              require('lspconfig')['lua_ls'].setup {
+                capabilities = capabilities,
+                -- add LuaAddons
+                settings = {
+                  Lua = {
+                    library = {
+                      {os.getenv("HOME") .. ".local/share/LuaAddons/love2d/library"}
+                    },
+                    workspace = {
+                      userThirdParty = {os.getenv("HOME") .. ".local/share/LuaAddons"},
+                      checkThirdParty = "Apply"
+                    }
+                  }
+                }
+              }
+
           end
         }
 

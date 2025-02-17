@@ -7,6 +7,8 @@
 -- buffer management 
 -- close tab
 vim.keymap.set('n', '<leader>bd', '<cmd>:bd<CR>', {desc="[D]elete Buffer"})
+-- kill tab
+vim.keymap.set('n', '<leader>bk', '<cmd>:bd!<CR>', {desc="[K]ill Buffer"})
 -- create new tab
 vim.keymap.set('n', '<leader>bn', '<cmd>:tabnew<CR>', {desc="[N]ew Buffer"})
 -- next buffer
@@ -74,6 +76,9 @@ vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
 
 -- terminal
 vim.keymap.set('n', '<leader>t', '<cmd>:terminal<CR>', {desc="[T]erminal"} )
+-- floating terminal toggle
+vim.keymap.set('n', '<M-h>', '<cmd>:Floaterminal<CR>', {desc="[T]erminal"} )
+
 
 -- window management
 -- vsplit

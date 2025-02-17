@@ -19,10 +19,5 @@
 require('lazy').setup({
 
   -- different plugin configs separated by their use case in plugins folder
-
-  { import = "plugins.completion" },
-  { import = "plugins.debugging" },
-  { import = "plugins.lsp" },
-  { import = 'plugins.aesthetics' },
-  { import = 'plugins.features' },
+  { import = "plugins" },
 })
