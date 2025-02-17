@@ -72,7 +72,6 @@ return {
 
   -- TPope: il papa
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-fugitive', -- git utilities
   'tpope/vim-surround', -- tools to mess with surrounding brackets/quotes/etc
 
   -- dressing: adds some finesse to nvim UI
@@ -91,8 +90,20 @@ return {
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-      }
+
+      { -- nvim-notify: notification plugin
+        "rcarriga/nvim-notify",
+        config = function ()
+          require('notify').setup(
+            -- h: notify.config
+            {
+              render = "compact",
+              stages = "fade",
+            }
+          )
+        end
+      },
+    },
   },
 
 
@@ -111,7 +122,7 @@ return {
 }
 
 
---[
+--[ TODO: get rid of triangles in lualine
 --
 --
 --  icons_enabled = true,

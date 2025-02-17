@@ -5,7 +5,63 @@
 
 return {
 
-  { -- Which-Key
+  -- Git Integration --------------------------------------------------
+
+  -- See `:help gitsigns` to understand what the configuration keys do
+  { -- GitSigns: Adds git related signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+    },
+  },
+
+  { -- Neogit: the successor to TPope's fugitive git plugin
+    "NeogitOrg/neogit",
+
+      dependencies = {
+        "nvim-lua/plenary.nvim",         -- required
+        "sindrets/diffview.nvim",        -- optional - Diff integration
+
+        -- Only one of these is needed.
+        -- "nvim-telescope/telescope.nvim", -- optional
+        "ibhagwan/fzf-lua",              -- optional
+        -- "echasnovski/mini.pick",         -- optional
+      },
+
+      config = true
+  },
+
+  { -- LazyGit: Git TUI for the lazy
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+        { "<leader>gl", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+  },
+
+
+  -- UI --------------------------------------------------
+
+  { -- Which-Key: preview key combo's effects
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
@@ -31,20 +87,6 @@ return {
       wk.add(opts.groups)
     end
 
-  },
-
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- GitSigns: Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
   },
 
   { -- Telescope: adds nice menu to some vim ops
@@ -76,6 +118,8 @@ return {
   },
 
   { -- NeoTree: filetree viewer
+    -- NOTE: oil.nvim is apparently the cool kid's preferred way to interact with files
+    -- May switch when bored
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
@@ -100,13 +144,15 @@ return {
     end
   },
 
-  { -- Autopairs
+  -- Coding Sugar --------------------------------------------------
+
+  { -- Autopairs: automatically add complements of characters that come in pairs
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {}
   },
 
-  {
+  { -- todo-comments: Highlights & adds quickfix list for TODO comments and more
     "folke/todo-comments.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -119,14 +165,14 @@ return {
     end
   },
 
-  { -- Comment
+  { -- Comment: toggle line comments
     'numToStr/Comment.nvim', opts = {}, lazy = false,
     config = function()
       require('Comment').setup()
     end
   },
 
-  { -- formatter
+  { -- formatter: install and use formatters to make files neater
     'stevearc/conform.nvim',
     opts = {},
     keys = {

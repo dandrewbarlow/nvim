@@ -52,8 +52,8 @@ vim.keymap.set('n', '<leader>sl', "<cmd>Trouble loclist toggle<cr>", {desc="[S]h
 
 
 -- Git
-vim.keymap.set('n', '<leader>gs', '<cmd>:Git status<CR>', {desc="[G]it [S]tatus"} )
-vim.keymap.set('n', '<leader>ga', '<cmd>:Git add .<CR>', {desc="[G]it [A]dd ."} )
+vim.keymap.set('n', '<leader>gs', '<cmd>:Neogit<CR>', {desc="[G]it [S]tatus"} )
+vim.keymap.set('n', '<leader>ga', '<cmd>:Neogit add .<CR>', {desc="[G]it [A]dd ."} )
 
 
 -- TODO: commits w/ user input

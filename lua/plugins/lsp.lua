@@ -40,6 +40,8 @@ return {
               -- See the configuration section for more details
               -- Load luvit types when the `vim.uv` word is found
               { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+              -- love2d game library
+              { path = os.getenv("HOME") .. ".local/share/LuaAddons/love2d/library", words = { "love" } }
             },
           },
         },
@@ -69,25 +71,26 @@ return {
           end,
 
           -- custom handlers
-          ['lua_ls'] = function ()
-              local capabilities = require('cmp_nvim_lsp').default_capabilities()
-              require('lspconfig')['lua_ls'].setup {
-                capabilities = capabilities,
-                -- add LuaAddons
-                settings = {
-                  Lua = {
-                    library = {
-                      {os.getenv("HOME") .. ".local/share/LuaAddons/love2d/library"}
-                    },
-                    workspace = {
-                      userThirdParty = {os.getenv("HOME") .. ".local/share/LuaAddons"},
-                      checkThirdParty = "Apply"
-                    }
-                  }
-                }
-              }
-
-          end
+          -- BUG: I don't think this is getting called
+          -- ['lua_ls'] = function ()
+          --     local capabilities = require('cmp_nvim_lsp').default_capabilities()
+          --     require('lspconfig')['lua_ls'].setup {
+          --       capabilities = capabilities,
+          --       -- add LuaAddons
+          --       settings = {
+          --         Lua = {
+          --           library = {
+          --             {os.getenv("HOME") .. ".local/share/LuaAddons/love2d/library"}
+          --           },
+          --           workspace = {
+          --             userThirdParty = {os.getenv("HOME") .. ".local/share/LuaAddons"},
+          --             checkThirdParty = "Apply"
+          --           }
+          --         }
+          --       }
+          --     }
+          --
+          -- end
         }
 
         require("mason-lspconfig").setup {
