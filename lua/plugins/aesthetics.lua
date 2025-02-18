@@ -27,6 +27,7 @@ return {
 
 
   -- PRETTY FEATURES --------------------------------------------------
+
   { -- Alpha: Startup dashboard
     'goolord/alpha-nvim',
     dependencies = {
@@ -120,6 +121,14 @@ return {
     },
   },
 
+  { -- zen-mode: cozy editing experience
+    "folke/zen-mode.nvim",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  },
 
   { -- Lualine: statusline plugin
     'nvim-lualine/lualine.nvim',

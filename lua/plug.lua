@@ -1,4 +1,4 @@
--- plugins.lua
+-- plug.lua
 -- Andrew Barlow
 --
 

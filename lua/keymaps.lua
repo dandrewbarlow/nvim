@@ -57,7 +57,9 @@ vim.keymap.set('n', '<leader>ga', '<cmd>:Neogit add .<CR>', {desc="[G]it [A]dd .
 
 -- aesthetic commands
 -- colorscheme
-vim.keymap.set('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', {desc="[A]esthetic [C]olorschemes"} )
+vim.keymap.set('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', {desc="[C]olorschemes"} )
+-- zen mode
+vim.keymap.set('n', '<leader>az', '<cmd>:ZenMode<CR>', {desc="[Z]en"} )
 
 -- Mason
 vim.keymap.set('n', '<leader>m', '<cmd>:Mason<CR>', {desc="[M]ason"} )
@@ -113,6 +115,10 @@ vim.keymap.set('n', '<leader>e', function()
 
 -- Save buffer
 vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
+
+-- quit
+vim.keymap.set('n', '<leader>q', '<cmd>:q<CR>', {desc="[Q]uit"})
+
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
