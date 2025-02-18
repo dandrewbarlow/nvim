@@ -168,7 +168,17 @@ return {
   { -- Comment: toggle line comments
     'numToStr/Comment.nvim', opts = {}, lazy = false,
     config = function()
-      require('Comment').setup()
+      -- custome comment toggling shortcuts 
+      require('Comment').setup({
+        toggler = {
+          line = '<leader>/',
+          block = '<leader>;',
+        },
+        opleader = {
+          line = '<leader>/',
+          block = '<leader>;',
+        },
+      })
     end
   },
 

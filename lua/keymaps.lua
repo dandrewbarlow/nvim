@@ -6,9 +6,9 @@
 
 -- buffer management 
 -- close tab
-vim.keymap.set('n', '<leader>bd', '<cmd>:bd<CR>', {desc="[D]elete Buffer"})
+vim.keymap.set('n', '<leader>bd', '<cmd>:bd<cr>', {desc="[d]elete buffer"})
 -- kill tab
-vim.keymap.set('n', '<leader>bk', '<cmd>:bd!<CR>', {desc="[K]ill Buffer"})
+vim.keymap.set('n', '<leader>bk', '<cmd>:bd!<cr>', {desc="[k]ill buffer"})
 -- create new tab
 vim.keymap.set('n', '<leader>bn', '<cmd>:tabnew<CR>', {desc="[N]ew Buffer"})
 -- next buffer
@@ -55,14 +55,6 @@ vim.keymap.set('n', '<leader>sl', "<cmd>Trouble loclist toggle<cr>", {desc="[S]h
 vim.keymap.set('n', '<leader>gs', '<cmd>:Neogit<CR>', {desc="[G]it [S]tatus"} )
 vim.keymap.set('n', '<leader>ga', '<cmd>:Neogit add .<CR>', {desc="[G]it [A]dd ."} )
 
-
--- TODO: commits w/ user input
--- Comments ? for some reason API is unneccesarily opaque, not sure how to call this
--- for now, it has default shortcuts of `gc_`
--- vim.keymap.set('v', '<leader>/', '?', {desc="Comment selection"} )
--- vim.keymap.set('n', '<leader>/', '?', {desc="Comment line"} )
-
-
 -- aesthetic commands
 -- colorscheme
 vim.keymap.set('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', {desc="[A]esthetic [C]olorschemes"} )
@@ -77,7 +69,7 @@ vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
 -- terminal
 vim.keymap.set('n', '<leader>t', '<cmd>:terminal<CR>', {desc="[T]erminal"} )
 -- floating terminal toggle
-vim.keymap.set('n', '<M-h>', '<cmd>:Floaterminal<CR>', {desc="[T]erminal"} )
+vim.keymap.set({'n', 't'}, '<M-h>', '<cmd>:Floaterminal<CR>', {desc="[T]erminal"} )
 
 
 -- window management
@@ -119,13 +111,8 @@ vim.keymap.set('n', '<leader>e', function()
 
 -- REGULAR KEYMAPS --------------------------------------------------
 
--- TODO: quick comment toggle
--- vim.keymap.set('n', '<leader>/', )
-
 -- Save buffer
-vim.keymap.set('n', '<C-s>', '<cmd>:w<CR>')
-vim.keymap.set('i', '<C-s>', '<cmd>:w<CR>')
-vim.keymap.set('i', '<C-s>', '<cmd>:w<CR>')
+vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
