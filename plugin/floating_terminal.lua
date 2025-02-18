@@ -3,7 +3,7 @@
 --
 -- Based on TJ DeVries' video:
 -- https://www.youtube.com/watch?v=5PIiKDES_wc
--- set in keymaps.lua to <alt-h>
+-- set in keymaps.lua to <C-Space>
 
 
 local state = {
