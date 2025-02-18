@@ -144,6 +144,18 @@ return {
     end
   },
 
+  { -- help-vsplit.nvim: open help menu in a vsplit if there's enough room. personal preference
+    'anuvyklack/help-vsplit.nvim',
+    config = function ()
+      require('help-vsplit').setup({
+        always = false,
+        side = 'right',
+        buftype = { 'help' },
+        filetype = { 'man' },
+      })
+    end
+
+  },
   -- Coding Sugar --------------------------------------------------
 
   { -- Autopairs: automatically add complements of characters that come in pairs
