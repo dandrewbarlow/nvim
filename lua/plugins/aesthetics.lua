@@ -4,15 +4,29 @@
 -- for the finer things
 
 return {
+  -- COLORSCHEMES --------------------------------------------------
+
   { -- goated colorscheme
     'Mofiqul/dracula.nvim',
     config = function()
+      -- this line sets dracula to default colorscheme
       require('dracula').setup {
         vim.cmd.colorscheme('dracula'),
       }
     end
   },
 
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+
+  { "folke/tokyonight.nvim", priority = 1000 },
+
+  { "sainnhe/gruvbox-material", name="gruvbox", priority=1000 },
+
+
+  { "shaunsingh/nord.nvim", name="nord", priority=1000},
+
+
+  -- PRETTY FEATURES --------------------------------------------------
   { -- Alpha: Startup dashboard
     'goolord/alpha-nvim',
     dependencies = {
