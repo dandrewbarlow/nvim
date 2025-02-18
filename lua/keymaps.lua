@@ -3,10 +3,12 @@
 
 
 -- LEADER SHORTCUTS --------------------------------------------------
+----------------------------------------------------------------------
 
--- buffer management 
+-- BUFFER MANAGEMENT --------------------------------------------------
+
 -- close tab
-vim.keymap.set('n', '<leader>bd', '<cmd>:bd<cr>', {desc="[d]elete buffer"})
+vim.keymap.set('n', '<leader>bd', '<cmd>:bd<cr>', {desc="[D]elete buffer"})
 -- kill tab
 vim.keymap.set('n', '<leader>bk', '<cmd>:bd!<cr>', {desc="[k]ill buffer"})
 -- create new tab
@@ -16,65 +18,81 @@ vim.keymap.set('n', '<Tab>', '<cmd>:BufferLineCycleNext<CR>')
 -- previous buffer
 vim.keymap.set('n', '<S-Tab>', '<cmd>:BufferLineCyclePrev<CR>')
 
--- Telescope (find) commands
+-- TELESCOPE (FIND) COMMANDS --------------------------------------------------
+
 -- file finding
-vim.keymap.set('n', '<leader>ff', '<cmd>:Telescope find_files<CR>', {desc="[F]ind [F]iles"} )
+vim.keymap.set('n', '<leader>ff', '<cmd>:Telescope find_files<CR>', {desc="[F]iles"} )
 -- grep this
-vim.keymap.set('n', '<leader>fg', '<cmd>:Telescope live_grep<CR>', {desc="[F]ind w/ [G]rep"} )
+vim.keymap.set('n', '<leader>fg', '<cmd>:Telescope live_grep<CR>', {desc="[G]rep"} )
 -- command finding
-vim.keymap.set('n', '<leader>fc', '<cmd>:Telescope commands<CR>', {desc="[F]ind [C]ommand"} )
+vim.keymap.set('n', '<leader>fc', '<cmd>:Telescope commands<CR>', {desc="[C]ommand"} )
 -- manpage finding
-vim.keymap.set('n', '<leader>fm', '<cmd>:Telescope man_pages<CR>', {desc="[F]ind [M]anual"} )
+vim.keymap.set('n', '<leader>fm', '<cmd>:Telescope man_pages<CR>', {desc="[M]anual"} )
 -- notification finding
-vim.keymap.set('n', '<leader>fn', '<cmd>:Telescope notify<CR>', {desc="[F]ind [N]otification"} )
+vim.keymap.set('n', '<leader>fn', '<cmd>:Telescope notify<CR>', {desc="[N]otification"} )
 -- todo finding
-vim.keymap.set('n', '<leader>ft', '<cmd>:TodoTelescope<CR>', {desc="[F]ind [T]odo's"} )
+vim.keymap.set('n', '<leader>ft', '<cmd>:TodoTelescope<CR>', {desc="[T]odo's"} )
 -- find buffer
-vim.keymap.set('n', '<leader>fb', '<cmd>:Telescope buffers<CR>', {desc="[F]ind [B]uffer"})
+vim.keymap.set('n', '<leader>fb', '<cmd>:Telescope buffers<CR>', {desc="[B]uffer"})
 -- help
-vim.keymap.set('n', '<leader>fh', '<cmd>:Telescope help_tags<CR>', {desc="[F]ind [H]elp"} )
+vim.keymap.set('n', '<leader>fh', '<cmd>:Telescope help_tags<CR>', {desc="[H]elp"} )
 -- previous files
-vim.keymap.set('n', '<leader>fp', '<cmd>:Telescope oldfiles<CR>', {desc="[F]ind [P]revious Files"} )
+vim.keymap.set('n', '<leader>fp', '<cmd>:Telescope oldfiles<CR>', {desc="[P]revious Files"} )
 
--- Commands to [S]how a panel (a [s]tretch)
+-- RUN COMMANDS --------------------------------------------------
+
+-- overseer run
+vim.keymap.set('n', '<leader>rr', '<cmd>OverseerRun<CR>', {desc="[R]un"})
+-- overseer build
+vim.keymap.set('n', '<leader>rb', '<cmd>OverseerBuild<CR>', {desc="[B]uild"})
+
+-- SHOW COMANDS --------------------------------------------------
+
 -- Show todo's in a quick-fix panel
-vim.keymap.set('n', '<leader>st', '<cmd>:TodoQuickFix<CR>', {desc="[S]how [T]odos"} )
+vim.keymap.set('n', '<leader>st', '<cmd>:TodoQuickFix<CR>', {desc="[T]odos"} )
 -- show Trouble quickfix list
-vim.keymap.set('n', '<leader>sq', '<cmd>:Trouble qflist toggle<CR>', {desc="[S]how [Q]uickfixes"} )
+vim.keymap.set('n', '<leader>sq', '<cmd>:Trouble qflist toggle<CR>', {desc="[Q]uickfixes"} )
 -- show trouble diagnostics
-vim.keymap.set('n', '<leader>sd', '<cmd>:Trouble diagnostics toggle<CR>', {desc="[S]how [D]iagnostics"} )
+vim.keymap.set('n', '<leader>sd', '<cmd>:Trouble diagnostics toggle<CR>', {desc="[D]iagnostics"} )
 -- show trouble symbols
-vim.keymap.set('n', '<leader>ss', "<cmd>Trouble symbols toggle focus=false<cr>", {desc="[S]how [S]ymbols"} )
+vim.keymap.set('n', '<leader>ss', "<cmd>Trouble symbols toggle focus=false<cr>", {desc="[S]ymbols"} )
 -- show trouble References
-vim.keymap.set('n', '<leader>sr', "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc="[S]how [R]eferences"} )
+vim.keymap.set('n', '<leader>sr', "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc="[R]eferences"} )
 -- show trouble loclist
-vim.keymap.set('n', '<leader>sl', "<cmd>Trouble loclist toggle<cr>", {desc="[S]how [L]ocation list"} )
+vim.keymap.set('n', '<leader>sl', "<cmd>Trouble loclist toggle<cr>", {desc="[L]ocation List"} )
+-- show markdown preview
+vim.keymap.set('n', '<leader>sm', "<cmd>Markview<cr>", {desc="[M]arkdown Preview Toggle"} )
+-- show overseer
+vim.keymap.set('n', '<leader>so', "<cmd>OverseerToggle<cr>", {desc="[O]verseer"} )
 
 
--- Git
-vim.keymap.set('n', '<leader>gs', '<cmd>:Neogit<CR>', {desc="[G]it [S]tatus"} )
-vim.keymap.set('n', '<leader>ga', '<cmd>:Neogit add .<CR>', {desc="[G]it [A]dd ."} )
+-- GIT --------------------------------------------------
 
--- aesthetic commands
+vim.keymap.set('n', '<leader>gs', '<cmd>:Neogit<CR>', {desc="[S]tatus"} )
+vim.keymap.set('n', '<leader>ga', '<cmd>:Neogit add .<CR>', {desc="[A]dd ."} )
+
+-- AESTHETIC COMMANDS --------------------------------------------------
+
 -- colorscheme
 vim.keymap.set('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', {desc="[C]olorschemes"} )
 -- zen mode
 vim.keymap.set('n', '<leader>az', '<cmd>:ZenMode<CR>', {desc="[Z]en"} )
 
--- Mason
+-- MASON --------------------------------------------------
 vim.keymap.set('n', '<leader>m', '<cmd>:Mason<CR>', {desc="[M]ason"} )
 
--- Lazy
+-- LAZY --------------------------------------------------
 vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
 
 
--- terminal
+-- TERMINAL --------------------------------------------------
 vim.keymap.set('n', '<leader>t', '<cmd>:terminal<CR>', {desc="[T]erminal"} )
 -- floating terminal toggle
-vim.keymap.set({'n', 't'}, '<C-Space>', '<cmd>:Floaterminal<CR>', {desc="[T]erminal"} )
+vim.keymap.set({'n', 't'}, '<C-Space>', '<cmd>:Floaterminal<CR>', {desc="Floating Terminal Toggle"} )
 
 
--- window management
+-- WINDOW MANAGEMENT --------------------------------------------------
+
 -- vsplit
 vim.keymap.set('n', '<leader>wv', '<cmd>:vsplit<CR>', {desc="[V]ertical Split"} )
 -- hsplit
@@ -83,7 +101,7 @@ vim.keymap.set('n', '<leader>wh', '<cmd>:split<CR>', {desc="[H]orizontal Split"}
 vim.keymap.set('n', '<leader>wc', '<cmd>:close<CR>', {desc="[C]lose"} )
 
 
--- toggle neotree
+-- NEOTREE --------------------------------------------------
 vim.keymap.set('n', '<leader>e', function()
   local reveal_file = vim.fn.expand('%:p')
   if (reveal_file == '') then
@@ -108,10 +126,9 @@ vim.keymap.set('n', '<leader>e', function()
   { desc = "[E]xplorer" }
 );
 
--- Diagnostic keymaps
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- REGULAR KEYMAPS --------------------------------------------------
+---------------------------------------------------------------------
 
 -- Save buffer
 vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')

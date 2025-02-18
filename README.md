@@ -6,11 +6,11 @@ Andrew Barlow ([github](https://github.com/dandrewbarlow)|[website](https://a-ba
 
 These are my `neovim` configuration files. They've gone through numerous
 revisions through the years, and are likely to undergo more. I began building
-up my config w/ `Plug`, then was wowed by NVChad as a plug&play alternative,
+up my config w/ `Plug`, then was wowed by `NVChad` as a plug&play alternative,
 before deciding that I wanted more control over my config, and was willing to
 learn in order to do it.
 
-My current goal is to make `neovim`
+My current goal is to make `neovim`:
 
 1. sleek
 3. powerful
