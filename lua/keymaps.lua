@@ -69,7 +69,7 @@ vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
 -- terminal
 vim.keymap.set('n', '<leader>t', '<cmd>:terminal<CR>', {desc="[T]erminal"} )
 -- floating terminal toggle
-vim.keymap.set({'n', 't'}, '<M-h>', '<cmd>:Floaterminal<CR>', {desc="[T]erminal"} )
+vim.keymap.set({'n', 't'}, '<C-Space>', '<cmd>:Floaterminal<CR>', {desc="[T]erminal"} )
 
 
 -- window management

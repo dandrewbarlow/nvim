@@ -194,6 +194,14 @@ return {
     end
   },
 
+  { -- mini.move: part of the mini.nvim library that allows you to easily move text around
+    'echasnovski/mini.move',
+    version = false,
+    config = function ()
+      require('mini.move').setup()
+    end
+  },
+
   { -- formatter: install and use formatters to make files neater
     'stevearc/conform.nvim',
     opts = {},
