@@ -4,16 +4,20 @@
 -- Language Server Protocol plugin configs
 
 -- commenting out options that are probably not needed/wanted for all installs
-local language_servers = { import = 'config.language_server_list' }
+local language_servers = require('plugins.config.lsp').lsp_list
 
 -- formatters
 -- TODO: automatically install formatters as well as LSPs
--- local formatters = {
---   "stylua",
---   "prettier"
--- }
+local formatters = require('plugins.config.lsp').formatter_list
 
 return {
+  { -- formatter: install and use formatters to make files neater
+    'stevearc/conform.nvim',
+    opts = {},
+    keys = require('plugins.config.conform').keys,
+    config = require('plugins.config.conform').config,
+  },
+
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -42,6 +46,6 @@ return {
 
   {
       "williamboman/mason-lspconfig.nvim",
-      config = { import = 'config.mason_lspconfig' }
+      config = require('plugins.config.mason_lspconfig').config,
   },
 }

@@ -5,97 +5,6 @@
 
 return {
 
-  -- Git Integration --------------------------------------------------
-
-  { -- GitSigns: Adds git related signs to the gutter, as well as utilities for
-    -- managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
-
-  { -- Neogit: the successor to TPope's fugitive git plugin
-    "NeogitOrg/neogit",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "sindrets/diffview.nvim",
-        "ibhagwan/fzf-lua"
-      },
-      config = true
-  },
-
-  { -- LazyGit: Git TUI for the lazy
-    "kdheepak/lazygit.nvim",
-    lazy = true,
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    -- optional for floating window border decoration
-    dependencies = {"nvim-lua/plenary.nvim",},
-
-    -- setting the keybinding for LazyGit with 'keys' is recommended in order
-    -- to load the plugin when the command is run for the first time
-    keys = {{ "<leader>gl", "<cmd>LazyGit<cr>", desc = "LazyGit" }}
-  },
-
-
-  -- UI --------------------------------------------------
-
-  { -- Which-Key: preview key combo's effects
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = require('plugins.config.which_key').init,
-    opts = require('plugins.config.which_key').opts,
-    config = require('plugins.config.which_key').config, 
-  },
-
-  { -- Telescope: adds nice menu to some vim ops
-    'nvim-telescope/telescope.nvim', tag = '0.1.5',
-    requires = { 'nvim-lua/plenary.nvim', },
-    config = require('plugins.config.telescope').config,
-  },
-
-  { -- telescope fzf util
-    'nvim-telescope/telescope-fzf-native.nvim',
-    -- need make, gcc installed, also have versions for cmake
-    build = 'make',
-  },
-
-  { -- NeoTree: filetree viewer
-    -- NOTE: oil.nvim is apparently the cool kid's preferred way to interact
-    -- with files. May switch when bored.
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = require('plugins.config.neotree').dependencies,
-    init =  require('plugins.config.neotree').init,
-  },
-
-  { -- help-vsplit.nvim: open help menu in a vsplit if there's enough room.
-    -- personal preference
-    'anuvyklack/help-vsplit.nvim',
-    config = function ()
-      require('help-vsplit').setup({
-        always = false,
-        side = 'right',
-        buftype = { 'help' },
-        filetype = { 'man' },
-      })
-    end
-
-  },
-  -- Coding Sugar --------------------------------------------------
-
   { -- Overseer: run build tasks
     'stevearc/overseer.nvim',
     opts = {},
@@ -109,6 +18,20 @@ return {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {}
+  },
+
+  { -- marks: improve functionality of vim marks
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function ()
+      require("marks").setup({
+        mappings = {
+          next = 'mn',
+          prev = 'mN',
+        },
+      })
+    end
   },
 
   { -- todo-comments: Highlights & adds quickfix list for TODO comments and
@@ -164,10 +87,4 @@ return {
     end
   },
 
-  { -- formatter: install and use formatters to make files neater
-    'stevearc/conform.nvim',
-    opts = {},
-    keys = require('plugins.config.conform').keys,
-    config = require('plugins.config.conform').config,
-  }
 }

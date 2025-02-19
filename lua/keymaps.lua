@@ -26,6 +26,8 @@ vim.keymap.set('n', '<leader>ff', '<cmd>:Telescope find_files<CR>', {desc="[F]il
 vim.keymap.set('n', '<leader>fg', '<cmd>:Telescope live_grep<CR>', {desc="[G]rep"} )
 -- command finding
 vim.keymap.set('n', '<leader>fc', '<cmd>:Telescope commands<CR>', {desc="[C]ommand"} )
+-- telescope menu
+vim.keymap.set('n', '<leader>fs', '<cmd>Telescope<CR>', {desc="Tele[S]cope"})
 -- manpage finding
 vim.keymap.set('n', '<leader>fm', '<cmd>:Telescope man_pages<CR>', {desc="[M]anual"} )
 -- notification finding
@@ -78,11 +80,21 @@ vim.keymap.set('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', {desc="[C]o
 -- zen mode
 vim.keymap.set('n', '<leader>az', '<cmd>:ZenMode<CR>', {desc="[Z]en"} )
 
--- MASON --------------------------------------------------
-vim.keymap.set('n', '<leader>m', '<cmd>:Mason<CR>', {desc="[M]ason"} )
+-- PLUGIN MANAGEMENT --------------------------------------------------
+-- mason --------------------------------------------------
+vim.keymap.set('n', '<leader>pm', '<cmd>:Mason<CR>', {desc="[M]ason"} )
+-- lazy --------------------------------------------------
+vim.keymap.set('n', '<leader>pl', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
 
--- LAZY --------------------------------------------------
-vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
+-- MARKS --------------------------------------------------
+-- show marks
+vim.keymap.set('n', '<leader>ml', '<cmd>MarksListAll<CR>', {desc="[L]ist"} )
+-- find marks
+vim.keymap.set('n', '<leader>mf', '<cmd>Telescope marks<CR>', {desc="[F]ind"} )
+-- next mark
+vim.keymap.set('n', '<leader>mn', '<Plug>(Marks-next)<CR>', {desc="[N]ext"} )
+-- prev mark
+vim.keymap.set('n', '<leader>mN', '<Plug>(Marks-prev)<CR>', {desc="Previous"} )
 
 
 -- TERMINAL --------------------------------------------------
@@ -129,6 +141,9 @@ vim.keymap.set('n', '<leader>e', function()
 
 -- REGULAR KEYMAPS --------------------------------------------------
 ---------------------------------------------------------------------
+
+-- Oil
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- Save buffer
 vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
