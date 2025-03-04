@@ -27,3 +27,29 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
+
+
+-- LSP --------------------------------------------------
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    if client.supports_method('textDocument/rename') then
+      -- Rename var keymap
+      vim.keymap.set('n', '<leader>lr', '<CMD> lua vim.lsp.buf.rename()<CR>', {desc ="Rename"})
+    end
+
+    if client.supports_method('textDocument/implementation') then
+      -- Create a keymap for vim.lsp.buf.implementation
+      vim.keymap.set('n', '<leader>li', '<CMD> lua vim.lsp.buf.implementation()<CR>', {desc ="Implementation"})
+    end
+
+    -- code action
+    vim.keymap.set('n', '<leader>la', '<CMD> lua vim.lsp.buf.code_action()<CR>', {desc ="Code Action"})
+
+    -- show lsp info
+    vim.keymap.set('n', '<leader>li', '<CMD>LspInfo<CR>', {desc="LSP Info"})
+  end,
+})
+

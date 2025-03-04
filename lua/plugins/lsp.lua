@@ -35,17 +35,53 @@ return {
           },
         },
     },
+    config = function()
+      require('lazydev').setup({
+        library = {
+          'nvim-dap-ui',
+        },
+      })
+    end
   },
 
   { -- Mason: LSP manager
     'williamboman/mason.nvim',
+    dependencies = {
+      "jay-babu/mason-nvim-dap.nvim",
+      "mfussenegger/nvim-dap",
+    },
     config = function()
       require('mason').setup()
+
+      -- TODO: automatic DAP/LSP/Formatter installation
+      local dap_list = require('plugins.config.dap').dap_list
+
+      -- BUG: no automatic DAP installation
+      require('mason-nvim-dap').setup({
+        ensure_installed = dap_list,
+        -- TODO: inspect if further config neccessary
+        handlers = {
+          function (config)
+            require('mason-nvim-dap').default_setup(config)
+          end
+        },
+        automatic_installation = false
+      })
+
     end
   },
 
   {
       "williamboman/mason-lspconfig.nvim",
       config = require('plugins.config.mason_lspconfig').config,
+  },
+
+  {
+    'kosayoda/nvim-lightbulb',
+    config = function ()
+      require('nvim-lightbulb').setup({
+        autocmd = {enabled = true},
+      })
+    end
   },
 }

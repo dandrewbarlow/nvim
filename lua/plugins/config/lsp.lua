@@ -7,7 +7,7 @@ return {
   lsp_list = {
     "bashls",
     "clangd",
-    "clang-format",
+    -- "clang-format",
     -- "docker_compose_language_service",
     -- "dockerls",
     -- "eslint",
@@ -16,6 +16,7 @@ return {
     "jsonls",
     "lua_ls",
     "pyright",
+    "glslls",
     -- "rust_analyzer",
     -- "sqls",
     -- "tailwindcss",

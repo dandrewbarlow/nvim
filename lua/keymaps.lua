@@ -21,7 +21,7 @@ vim.keymap.set('n', '<S-Tab>', '<cmd>:BufferLineCyclePrev<CR>')
 -- TELESCOPE (FIND) COMMANDS --------------------------------------------------
 
 -- file finding
-vim.keymap.set('n', '<leader>ff', '<cmd>:Telescope find_files<CR>', {desc="[F]iles"} )
+vim.keymap.set('n', '<leader>ff', '<cmd>:Telescope fd<CR>', {desc="[F]iles"} )
 -- grep this
 vim.keymap.set('n', '<leader>fg', '<cmd>:Telescope live_grep<CR>', {desc="[G]rep"} )
 -- command finding
@@ -40,6 +40,8 @@ vim.keymap.set('n', '<leader>fb', '<cmd>:Telescope buffers<CR>', {desc="[B]uffer
 vim.keymap.set('n', '<leader>fh', '<cmd>:Telescope help_tags<CR>', {desc="[H]elp"} )
 -- previous files
 vim.keymap.set('n', '<leader>fp', '<cmd>:Telescope oldfiles<CR>', {desc="[P]revious Files"} )
+-- spelling suggestions
+vim.keymap.set('n', '<leader>fr', '<cmd>:Telescope spell_suggest<CR>', {desc="Spelling [R]eccomendation"} )
 
 -- RUN COMMANDS --------------------------------------------------
 
@@ -47,6 +49,12 @@ vim.keymap.set('n', '<leader>fp', '<cmd>:Telescope oldfiles<CR>', {desc="[P]revi
 vim.keymap.set('n', '<leader>rr', '<cmd>OverseerRun<CR>', {desc="[R]un"})
 -- overseer build
 vim.keymap.set('n', '<leader>rb', '<cmd>OverseerBuild<CR>', {desc="[B]uild"})
+-- overseer save
+vim.keymap.set('n', '<leader>rs', '<cmd>OverseerSaveBundle<CR>', {desc="[S]ave Bundle"})
+-- overseer load
+vim.keymap.set('n', '<leader>rl', '<cmd>OverseerLoadBundle<CR>', {desc="[L]oad Bundle"})
+-- overseer action
+vim.keymap.set('n', '<leader>ra', '<cmd>OverseerQuickAction<CR>', {desc="[A]ction"})
 
 -- SHOW COMANDS --------------------------------------------------
 
@@ -66,6 +74,35 @@ vim.keymap.set('n', '<leader>sl', "<cmd>Trouble loclist toggle<cr>", {desc="[L]o
 vim.keymap.set('n', '<leader>sm', "<cmd>Markview<cr>", {desc="[M]arkdown Preview Toggle"} )
 -- show overseer
 vim.keymap.set('n', '<leader>so', "<cmd>OverseerToggle<cr>", {desc="[O]verseer"} )
+
+-- DEBUG COMMANDS --------------------------------------------------
+-- debug toggle UI
+vim.keymap.set('n', '<leader>dt', "<cmd>lua require('dapui').toggle()<CR>", {desc="[T]oggle"} )
+
+
+vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end, {desc="[C]ontinue"})
+vim.keymap.set('n', '<leader>do', function() require('dap').step_over() end, {desc="Step [o]ver"})
+vim.keymap.set('n', '<leader>di', function() require('dap').step_into() end, {desc="Step [i]nto"})
+vim.keymap.set('n', '<leader>dO', function() require('dap').step_out() end, {desc="Step [O]ut"})
+vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, {desc="toggle [b]reakpoint"})
+vim.keymap.set('n', '<Leader>dB', function() require('dap').set_breakpoint() end, {desc="set [B]reakpoint"})
+vim.keymap.set('n', '<Leader>dl', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, {desc="set [l]og breakpoint"})
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, {desc="open [r]epl"})
+vim.keymap.set('n', '<Leader>dL', function() require('dap').run_last() end, {desc="run [L]ast"})
+vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+  require('dap.ui.widgets').hover()
+end, {desc="[h]over"})
+vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+  require('dap.ui.widgets').preview()
+end, {desc="[p]review"})
+vim.keymap.set('n', '<Leader>df', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
+end, {desc="[f]loat"})
+vim.keymap.set('n', '<Leader>ds', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+end, {desc="[s]copes"})
 
 
 -- GIT --------------------------------------------------
@@ -144,6 +181,12 @@ vim.keymap.set('n', '<leader>e', function()
 
 -- Oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- resize windows
+vim.keymap.set('n', '<C-->', '<CMD>resize -1<CR>', {desc = "decrease window height"})
+vim.keymap.set('n', '<C-=>', '<CMD>resize +1<CR>', {desc = "increase window height"})
+vim.keymap.set('n', '<C-,>', '<CMD>vertical resize -1<CR>', {desc = "increase window width"})
+vim.keymap.set('n', '<C-.>', '<CMD>vertical resize +1<CR>', {desc = "decrease window width"})
 
 -- Save buffer
 vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')

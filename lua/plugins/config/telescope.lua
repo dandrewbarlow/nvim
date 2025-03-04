@@ -14,5 +14,6 @@ return {
 
       -- enable telescope fuzzy finding
       require('telescope').load_extension('fzf')
+      require('telescope').load_extension('noice')
     end,
 }

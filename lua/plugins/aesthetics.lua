@@ -67,7 +67,7 @@ return {
     end
   },
 
-  { -- neoscroll: smooth scrolling
+  --[[ { -- neoscroll: smooth scrolling
     "karb94/neoscroll.nvim",
     config = function ()
       require('neoscroll').setup({
@@ -83,14 +83,22 @@ return {
         easing = 'cubic'
       })
     end
-  },
+  }, ]]
 
   -- TPope: il papa
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-surround', -- tools to mess with surrounding brackets/quotes/etc
 
-  -- dressing: adds some finesse to nvim UI
-  {"stevearc/dressing.nvim", opts = {}},
+  -- snacks
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+
+    opts = require('plugins.config.snacks').opts,
+
+    init = require('plugins.config.snacks').init,
+  },
 
   -- Noice: UI overhaul
   {
@@ -116,6 +124,39 @@ return {
         end
       },
     },
+    config = function ()
+      require('noice').setup({
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+        },
+        lualine_x = {
+          {
+            require("noice").api.status.message.get_hl,
+            cond = require("noice").api.status.message.has,
+          },
+          {
+            require("noice").api.status.command.get,
+            cond = require("noice").api.status.command.has,
+            color = { fg = "#ff9e64" },
+          },
+          {
+            require("noice").api.status.mode.get,
+            cond = require("noice").api.status.mode.has,
+            color = { fg = "#ff9e64" },
+          },
+          {
+            require("noice").api.status.search.get,
+            cond = require("noice").api.status.search.has,
+            color = { fg = "#ff9e64" },
+          },
+        }
+      })
+    end
   },
 
   { -- zen-mode: cozy editing experience
@@ -135,26 +176,11 @@ return {
     config = function()
       require('lualine').setup {
         options = {
-          theme = 'dracula'
-        }
+          theme = 'dracula',
+          component_separators = '|',
+          section_separators = '',
+        },
       }
     end,
   },
 }
-
-
---[ TODO: get rid of triangles in lualine
---
---
---  icons_enabled = true,
---  theme = 'auto',
---  component_separators = { left = '', right = ''},
---  section_separators = { left = '', right = ''},
---  disabled_filetypes = {
---    statusline = {},
---    winbar = {},
---
---
---
---
---]
