@@ -91,11 +91,28 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     options = {theme = 'dracula'},
     config = function()
+
+      -- show macro recording feedback on statusline
+      local function show_macro_recording()
+        local recording_register = vim.fn.reg_recording()
+        if recording_register == "" then
+          return ""
+        else
+          return " Recording @" .. recording_register
+        end
+      end
+
       require('lualine').setup {
         options = {
           theme = 'dracula',
           component_separators = '|',
           section_separators = '',
+          },
+        sections = {
+          lualine_c = {
+            'filename',
+            { "macro-recording", fmt = show_macro_recording }
+          }
         },
       }
     end,

@@ -1,6 +1,7 @@
 -- keymaps.lua
 -- Andrew Barlow
 
+local map = require('helpers.keys').map
 
 -- LEADER SHORTCUTS --------------------------------------------------
 ----------------------------------------------------------------------
@@ -8,133 +9,133 @@
 -- BUFFER MANAGEMENT --------------------------------------------------
 
 -- close tab
-vim.keymap.set('n', '<leader>bd', '<cmd>:bd<cr>', {desc="[D]elete buffer"})
+map('n', '<leader>bd', '<cmd>:bd<cr>', "[D]elete buffer")
 -- kill tab
-vim.keymap.set('n', '<leader>bk', '<cmd>:bd!<cr>', {desc="[k]ill buffer"})
+map('n', '<leader>bk', '<cmd>:bd!<cr>', "[k]ill buffer")
 -- create new tab
-vim.keymap.set('n', '<leader>bn', '<cmd>:tabnew<CR>', {desc="[N]ew Buffer"})
+map('n', '<leader>bn', '<cmd>:tabnew<CR>', "[N]ew Buffer")
 -- next buffer
-vim.keymap.set('n', '<Tab>', '<cmd>:BufferLineCycleNext<CR>')
+map('n', '<Tab>', '<cmd>:BufferLineCycleNext<CR>')
 -- previous buffer
-vim.keymap.set('n', '<S-Tab>', '<cmd>:BufferLineCyclePrev<CR>')
+map('n', '<S-Tab>', '<cmd>:BufferLineCyclePrev<CR>')
 
 
 -- TELESCOPE (FIND) COMMANDS --------------------------------------------------
 
 -- file finding
-vim.keymap.set('n', '<leader>ff', '<cmd>:Telescope fd<CR>', {desc="[F]iles"} )
+map('n', '<leader>ff', '<cmd>:Telescope fd<CR>', "[F]iles" )
 -- grep this
-vim.keymap.set('n', '<leader>fg', '<cmd>:Telescope live_grep<CR>', {desc="[G]rep"} )
+map('n', '<leader>fg', '<cmd>:Telescope live_grep<CR>', "[G]rep" )
 -- command finding
-vim.keymap.set('n', '<leader>fc', '<cmd>:Telescope commands<CR>', {desc="[C]ommand"} )
+map('n', '<leader>fc', '<cmd>:Telescope commands<CR>', "[C]ommand" )
 -- telescope menu
-vim.keymap.set('n', '<leader>fs', '<cmd>Telescope<CR>', {desc="Tele[S]cope"})
+map('n', '<leader>fs', '<cmd>Telescope<CR>', "Tele[S]cope")
 -- manpage finding
-vim.keymap.set('n', '<leader>fm', '<cmd>:Telescope man_pages<CR>', {desc="[M]anual"} )
+map('n', '<leader>fm', '<cmd>:Telescope man_pages<CR>', "[M]anual" )
 -- notification finding
-vim.keymap.set('n', '<leader>fn', '<cmd>:Telescope notify<CR>', {desc="[N]otification"} )
+map('n', '<leader>fn', '<cmd>:Telescope notify<CR>', "[N]otification" )
 -- todo finding
-vim.keymap.set('n', '<leader>ft', '<cmd>:TodoTelescope<CR>', {desc="[T]odo's"} )
+map('n', '<leader>ft', '<cmd>:TodoTelescope<CR>', "[T]odo's" )
 -- find buffer
-vim.keymap.set('n', '<leader>fb', '<cmd>:Telescope buffers<CR>', {desc="[B]uffer"})
+map('n', '<leader>fb', '<cmd>:Telescope buffers<CR>', "[B]uffer")
 -- help
-vim.keymap.set('n', '<leader>fh', '<cmd>:Telescope help_tags<CR>', {desc="[H]elp"} )
+map('n', '<leader>fh', '<cmd>:Telescope help_tags<CR>', "[H]elp" )
 -- previous files
-vim.keymap.set('n', '<leader>fp', '<cmd>:Telescope oldfiles<CR>', {desc="[P]revious Files"} )
+map('n', '<leader>fp', '<cmd>:Telescope oldfiles<CR>', "[P]revious Files" )
 -- spelling suggestions
-vim.keymap.set('n', '<leader>fr', '<cmd>:Telescope spell_suggest<CR>', {desc="Spelling [R]eccomendation"} )
+map('n', '<leader>fr', '<cmd>:Telescope spell_suggest<CR>', "Spelling [R]eccomendation" )
 
 -- RUN COMMANDS --------------------------------------------------
 
 -- overseer run
-vim.keymap.set('n', '<leader>rr', '<cmd>OverseerRun<CR>', {desc="[R]un"})
+map('n', '<leader>rr', '<cmd>OverseerRun<CR>', "[R]un")
 -- overseer build
-vim.keymap.set('n', '<leader>rb', '<cmd>OverseerBuild<CR>', {desc="[B]uild"})
+map('n', '<leader>rb', '<cmd>OverseerBuild<CR>', "[B]uild")
 -- overseer save
-vim.keymap.set('n', '<leader>rs', '<cmd>OverseerSaveBundle<CR>', {desc="[S]ave Bundle"})
+map('n', '<leader>rs', '<cmd>OverseerSaveBundle<CR>', "[S]ave Bundle")
 -- overseer load
-vim.keymap.set('n', '<leader>rl', '<cmd>OverseerLoadBundle<CR>', {desc="[L]oad Bundle"})
+map('n', '<leader>rl', '<cmd>OverseerLoadBundle<CR>', "[L]oad Bundle")
 -- overseer action
-vim.keymap.set('n', '<leader>ra', '<cmd>OverseerQuickAction<CR>', {desc="[A]ction"})
+map('n', '<leader>ra', '<cmd>OverseerQuickAction<CR>', "[A]ction")
 
 -- OPEN COMANDS --------------------------------------------------
 
 -- Show todo's in a quick-fix panel
-vim.keymap.set('n', '<leader>ot', '<cmd>:TodoQuickFix<CR>', {desc="[T]odos"} )
+map('n', '<leader>ot', '<cmd>:TodoQuickFix<CR>', "[T]odos" )
 -- show Trouble quickfix list
-vim.keymap.set('n', '<leader>oq', '<cmd>:Trouble qflist toggle<CR>', {desc="[Q]uickfixes"} )
+map('n', '<leader>oq', '<cmd>:Trouble qflist toggle<CR>', "[Q]uickfixes" )
 -- show trouble diagnostics
-vim.keymap.set('n', '<leader>od', '<cmd>:Trouble diagnostics toggle<CR>', {desc="[D]iagnostics"} )
+map('n', '<leader>od', '<cmd>:Trouble diagnostics toggle<CR>', "[D]iagnostics" )
 -- show trouble symbols
-vim.keymap.set('n', '<leader>os', "<cmd>Trouble symbols toggle focus=false<cr>", {desc="[S]ymbols"} )
+map('n', '<leader>os', "<cmd>Trouble symbols toggle focus=false<cr>", "[S]ymbols" )
 -- show trouble References
-vim.keymap.set('n', '<leader>or', "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc="[R]eferences"} )
+map('n', '<leader>or', "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", "[R]eferences" )
 -- show trouble loclist
-vim.keymap.set('n', '<leader>ol', "<cmd>Trouble loclist toggle<cr>", {desc="[L]ocation List"} )
+map('n', '<leader>ol', "<cmd>Trouble loclist toggle<cr>", "[L]ocation List" )
 -- show markdown preview
-vim.keymap.set('n', '<leader>om', "<cmd>Markview<cr>", {desc="[M]arkdown Preview Toggle"} )
+map('n', '<leader>om', "<cmd>Markview<cr>", "[M]arkdown Preview Toggle" )
 -- show overseer
-vim.keymap.set('n', '<leader>oo', "<cmd>OverseerToggle<cr>", {desc="[O]verseer"} )
+map('n', '<leader>oo', "<cmd>OverseerToggle<cr>", "[O]verseer" )
 
 -- DEBUG COMMANDS --------------------------------------------------
 -- debug toggle UI
-vim.keymap.set('n', '<leader>dt', "<cmd>lua require('dapui').toggle()<CR>", {desc="[T]oggle"} )
+map('n', '<leader>dt', "<cmd>lua require('dapui').toggle()<CR>", "[T]oggle" )
 
-vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end, {desc="[C]ontinue"})
-vim.keymap.set('n', '<leader>do', function() require('dap').step_over() end, {desc="Step [o]ver"})
-vim.keymap.set('n', '<leader>di', function() require('dap').step_into() end, {desc="Step [i]nto"})
-vim.keymap.set('n', '<leader>dO', function() require('dap').step_out() end, {desc="Step [O]ut"})
-vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, {desc="toggle [b]reakpoint"})
-vim.keymap.set('n', '<Leader>dB', function() require('dap').set_breakpoint() end, {desc="set [B]reakpoint"})
-vim.keymap.set('n', '<Leader>dl', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, {desc="set [l]og breakpoint"})
-vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, {desc="open [r]epl"})
-vim.keymap.set('n', '<Leader>dL', function() require('dap').run_last() end, {desc="run [L]ast"})
-vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+map('n', '<leader>dc', function() require('dap').continue() end, "[C]ontinue")
+map('n', '<leader>do', function() require('dap').step_over() end, "Step [o]ver")
+map('n', '<leader>di', function() require('dap').step_into() end, "Step [i]nto")
+map('n', '<leader>dO', function() require('dap').step_out() end, "Step [O]ut")
+map('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, "toggle [b]reakpoint")
+map('n', '<Leader>dB', function() require('dap').set_breakpoint() end, "set [B]reakpoint")
+map('n', '<Leader>dl', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, "set [l]og breakpoint")
+map('n', '<Leader>dr', function() require('dap').repl.open() end, "open [r]epl")
+map('n', '<Leader>dL', function() require('dap').run_last() end, "run [L]ast")
+map({'n', 'v'}, '<Leader>dh', function()
   require('dap.ui.widgets').hover()
-end, {desc="[h]over"})
+end, "[h]over")
 
-vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+map({'n', 'v'}, '<Leader>dp', function()
   require('dap.ui.widgets').preview()
-end, {desc="[p]review"})
+end, "[p]review")
 
-vim.keymap.set('n', '<Leader>df', function()
+map('n', '<Leader>df', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.frames)
-end, {desc="[f]loat"})
+end, "[f]loat")
 
-vim.keymap.set('n', '<Leader>ds', function()
+map('n', '<Leader>ds', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
-end, {desc="[s]copes"})
+end, "[s]copes")
 
 
 -- GIT --------------------------------------------------
 
-vim.keymap.set('n', '<leader>gs', '<cmd>:Neogit<CR>', {desc="[S]tatus"} )
-vim.keymap.set('n', '<leader>ga', '<cmd>:Neogit add .<CR>', {desc="[A]dd ."} )
+map('n', '<leader>gs', '<cmd>:Neogit<CR>', "[S]tatus" )
+map('n', '<leader>ga', '<cmd>:Neogit add .<CR>', "[A]dd ." )
 
 -- AESTHETIC COMMANDS --------------------------------------------------
 
 -- colorscheme
-vim.keymap.set('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', {desc="[C]olorschemes"} )
+map('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', "[C]olorschemes" )
 -- zen mode
-vim.keymap.set('n', '<leader>az', '<cmd>:ZenMode<CR>', {desc="[Z]en"} )
+map('n', '<leader>az', '<cmd>:ZenMode<CR>', "[Z]en" )
 
 -- PLUGIN MANAGEMENT --------------------------------------------------
 -- mason --------------------------------------------------
-vim.keymap.set('n', '<leader>pm', '<cmd>:Mason<CR>', {desc="[M]ason"} )
+map('n', '<leader>pm', '<cmd>:Mason<CR>', "[M]ason" )
 -- lazy --------------------------------------------------
-vim.keymap.set('n', '<leader>pl', '<cmd>:Lazy<CR>', {desc="[L]azy"} )
+map('n', '<leader>pl', '<cmd>:Lazy<CR>', "[L]azy" )
 
 -- MARKS --------------------------------------------------
 -- show marks
-vim.keymap.set('n', '<leader>ml', '<cmd>MarksListAll<CR>', {desc="[L]ist"} )
+map('n', '<leader>ml', '<cmd>MarksListAll<CR>', "[L]ist" )
 -- find marks
-vim.keymap.set('n', '<leader>mf', '<cmd>Telescope marks<CR>', {desc="[F]ind"} )
+map('n', '<leader>mf', '<cmd>Telescope marks<CR>', "[F]ind" )
 -- next mark
-vim.keymap.set('n', '<leader>mn', '<Plug>(Marks-next)<CR>', {desc="[N]ext"} )
+map('n', '<leader>mn', '<Plug>(Marks-next)<CR>', "[N]ext" )
 -- prev mark
-vim.keymap.set('n', '<leader>mN', '<Plug>(Marks-prev)<CR>', {desc="Previous"} )
+map('n', '<leader>mN', '<Plug>(Marks-prev)<CR>', "Previous" )
 
 
 -- TERMINAL --------------------------------------------------
@@ -142,26 +143,26 @@ vim.keymap.set('n', '<leader>mN', '<Plug>(Marks-prev)<CR>', {desc="Previous"} )
 -- see toggleterm in plugins/features.lua
 -- term mappings
 
-vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
-vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], {})
-vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], {})
-vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], {})
-vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], {})
-vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], {})
+map('t', '<esc>', "<C-\\><C-n>", "")
+map('t', '<C-h>', "<Cmd>wincmd h<CR>", "")
+map('t', '<C-j>', "<Cmd>wincmd j<CR>", "")
+map('t', '<C-k>', "<Cmd>wincmd k<CR>", "")
+map('t', '<C-l>', "<Cmd>wincmd l<CR>", "")
+map('t', '<C-w>', "<C-\\><C-n><C-w>", "")
 
 
 -- WINDOW MANAGEMENT --------------------------------------------------
 
 -- vsplit
-vim.keymap.set('n', '<leader>wv', '<cmd>:vsplit<CR>', {desc="[V]ertical Split"} )
+map('n', '<leader>wv', '<cmd>:vsplit<CR>', "[V]ertical Split" )
 -- hsplit
-vim.keymap.set('n', '<leader>wh', '<cmd>:split<CR>', {desc="[H]orizontal Split"} )
+map('n', '<leader>wh', '<cmd>:split<CR>', "[H]orizontal Split" )
 -- close window
-vim.keymap.set('n', '<leader>wc', '<cmd>:close<CR>', {desc="[C]lose"} )
+map('n', '<leader>wc', '<cmd>:close<CR>', "[C]lose" )
 
 
 -- NEOTREE --------------------------------------------------
-vim.keymap.set('n', '<leader>e', function()
+map('n', '<leader>e', function()
   local reveal_file = vim.fn.expand('%:p')
   if (reveal_file == '') then
     reveal_file = vim.fn.getcwd()
@@ -182,7 +183,7 @@ vim.keymap.set('n', '<leader>e', function()
     reveal_force_cwd = true,   -- change cwd without asking if needed
   })
   end,
-  { desc = "[E]xplorer" }
+    "[E]xplorer"
 );
 
 -- SESSION MANAGEMENT ---------------------------------------------------
@@ -206,7 +207,7 @@ local function check_sessions()
 end
 
 -- save session
-vim.keymap.set(
+map(
   'n',
   '<leader>zs',
   function ()
@@ -223,11 +224,11 @@ vim.keymap.set(
     )
 
   end,
-  {desc="Save Session"}
+  "Save Session"
 )
 
 -- load session
-vim.keymap.set(
+map(
   'n',
   '<leader>zl',
   function ()
@@ -235,11 +236,11 @@ vim.keymap.set(
       MiniSessions.select("read")
     end
   end,
-  {desc="Load Session"}
+  "Load Session"
 )
 
 -- delete sessions
-vim.keymap.set(
+map(
   'n',
   '<leader>zd',
   function ()
@@ -247,7 +248,7 @@ vim.keymap.set(
       MiniSessions.select("delete")
     end
   end,
-  {desc="Delete Session"}
+  "Delete Session"
 )
 
 
@@ -255,33 +256,33 @@ vim.keymap.set(
 ---------------------------------------------------------------------
 
 -- Oil
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+map("n", "-", "<CMD>Oil<CR>",   "Open parent directory" )
 
 -- resize windows
-vim.keymap.set('n', '<C-->', '<CMD>resize -1<CR>', {desc = "decrease window height"})
-vim.keymap.set('n', '<C-=>', '<CMD>resize +1<CR>', {desc = "increase window height"})
-vim.keymap.set('n', '<C-,>', '<CMD>vertical resize -1<CR>', {desc = "increase window width"})
-vim.keymap.set('n', '<C-.>', '<CMD>vertical resize +1<CR>', {desc = "decrease window width"})
+map('n', '<C-->', '<CMD>resize -1<CR>', "decrease window height")
+map('n', '<C-=>', '<CMD>resize +1<CR>', "increase window height")
+map('n', '<C-,>', '<CMD>vertical resize -1<CR>', "increase window width")
+map('n', '<C-.>', '<CMD>vertical resize +1<CR>', "decrease window width")
 
 -- Save buffer
-vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
+map({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
 
 -- quit
-vim.keymap.set('n', '<leader>q', '<cmd>:q<CR>', {desc="[Q]uit"})
+map('n', '<leader>q', '<cmd>:q<CR>', "[Q]uit")
 
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+map('n', '<C-h>', '<C-w><C-h>', 'Move focus to the left window' )
+map('n', '<C-l>', '<C-w><C-l>', 'Move focus to the right window' )
+map('n', '<C-j>', '<C-w><C-j>', 'Move focus to the lower window' )
+map('n', '<C-k>', '<C-w><C-k>', 'Move focus to the upper window' )
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 
 
