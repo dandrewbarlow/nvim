@@ -24,7 +24,7 @@ return {
       {"<leader>m", group = '[M]arks'},
       {"<leader>p", group = '[P]lugins'},
       {"<leader>r", group = '[R]un'},
-      {"<leader>s", group = '[S]how Panels'},
+      {"<leader>o", group = '[O]pen'},
       {"<leader>w", group = '[W]indow'},
       {"<leader>z", group = 'Session'},
     },

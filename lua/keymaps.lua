@@ -57,29 +57,28 @@ vim.keymap.set('n', '<leader>rl', '<cmd>OverseerLoadBundle<CR>', {desc="[L]oad B
 -- overseer action
 vim.keymap.set('n', '<leader>ra', '<cmd>OverseerQuickAction<CR>', {desc="[A]ction"})
 
--- SHOW COMANDS --------------------------------------------------
+-- OPEN COMANDS --------------------------------------------------
 
 -- Show todo's in a quick-fix panel
-vim.keymap.set('n', '<leader>st', '<cmd>:TodoQuickFix<CR>', {desc="[T]odos"} )
+vim.keymap.set('n', '<leader>ot', '<cmd>:TodoQuickFix<CR>', {desc="[T]odos"} )
 -- show Trouble quickfix list
-vim.keymap.set('n', '<leader>sq', '<cmd>:Trouble qflist toggle<CR>', {desc="[Q]uickfixes"} )
+vim.keymap.set('n', '<leader>oq', '<cmd>:Trouble qflist toggle<CR>', {desc="[Q]uickfixes"} )
 -- show trouble diagnostics
-vim.keymap.set('n', '<leader>sd', '<cmd>:Trouble diagnostics toggle<CR>', {desc="[D]iagnostics"} )
+vim.keymap.set('n', '<leader>od', '<cmd>:Trouble diagnostics toggle<CR>', {desc="[D]iagnostics"} )
 -- show trouble symbols
-vim.keymap.set('n', '<leader>ss', "<cmd>Trouble symbols toggle focus=false<cr>", {desc="[S]ymbols"} )
+vim.keymap.set('n', '<leader>os', "<cmd>Trouble symbols toggle focus=false<cr>", {desc="[S]ymbols"} )
 -- show trouble References
-vim.keymap.set('n', '<leader>sr', "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc="[R]eferences"} )
+vim.keymap.set('n', '<leader>or', "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc="[R]eferences"} )
 -- show trouble loclist
-vim.keymap.set('n', '<leader>sl', "<cmd>Trouble loclist toggle<cr>", {desc="[L]ocation List"} )
+vim.keymap.set('n', '<leader>ol', "<cmd>Trouble loclist toggle<cr>", {desc="[L]ocation List"} )
 -- show markdown preview
-vim.keymap.set('n', '<leader>sm', "<cmd>Markview<cr>", {desc="[M]arkdown Preview Toggle"} )
+vim.keymap.set('n', '<leader>om', "<cmd>Markview<cr>", {desc="[M]arkdown Preview Toggle"} )
 -- show overseer
-vim.keymap.set('n', '<leader>so', "<cmd>OverseerToggle<cr>", {desc="[O]verseer"} )
+vim.keymap.set('n', '<leader>oo', "<cmd>OverseerToggle<cr>", {desc="[O]verseer"} )
 
 -- DEBUG COMMANDS --------------------------------------------------
 -- debug toggle UI
 vim.keymap.set('n', '<leader>dt', "<cmd>lua require('dapui').toggle()<CR>", {desc="[T]oggle"} )
-
 
 vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end, {desc="[C]ontinue"})
 vim.keymap.set('n', '<leader>do', function() require('dap').step_over() end, {desc="Step [o]ver"})
@@ -93,13 +92,16 @@ vim.keymap.set('n', '<Leader>dL', function() require('dap').run_last() end, {des
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
   require('dap.ui.widgets').hover()
 end, {desc="[h]over"})
+
 vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
   require('dap.ui.widgets').preview()
 end, {desc="[p]review"})
+
 vim.keymap.set('n', '<Leader>df', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.frames)
 end, {desc="[f]loat"})
+
 vim.keymap.set('n', '<Leader>ds', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
@@ -136,9 +138,16 @@ vim.keymap.set('n', '<leader>mN', '<Plug>(Marks-prev)<CR>', {desc="Previous"} )
 
 
 -- TERMINAL --------------------------------------------------
-vim.keymap.set('n', '<leader>t', '<cmd>:terminal<CR>', {desc="[T]erminal"} )
--- floating terminal toggle
-vim.keymap.set({'n', 't'}, '<C-Space>', '<cmd>:Floaterminal<CR>', {desc="Floating Terminal Toggle"} )
+
+-- see toggleterm in plugins/features.lua
+-- term mappings
+
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
+vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], {})
+vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], {})
+vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], {})
+vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], {})
+vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], {})
 
 
 -- WINDOW MANAGEMENT --------------------------------------------------
@@ -260,14 +269,6 @@ vim.keymap.set({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
 -- quit
 vim.keymap.set('n', '<leader>q', '<cmd>:q<CR>', {desc="[Q]uit"})
 
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
