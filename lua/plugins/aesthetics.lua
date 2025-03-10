@@ -28,16 +28,8 @@ return {
 
   -- PRETTY FEATURES --------------------------------------------------
 
-  { -- Alpha: Startup dashboard
-    'goolord/alpha-nvim',
-    dependencies = {
-        'echasnovski/mini.icons',
-        'nvim-lua/plenary.nvim'
-    },
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.theta'.config)
-    end
-  };
+  -- alpha startup
+  require('plugins.config.alpha'),
 
   { --TreeSitter: syntax highlighting
     -- https://github.com/nvim-treesitter/nvim-treesitter
@@ -67,27 +59,8 @@ return {
     end
   },
 
-  --[[ { -- neoscroll: smooth scrolling
-    "karb94/neoscroll.nvim",
-    config = function ()
-      require('neoscroll').setup({
-        -- options: 
-        ----------------
-        -- linear
-        -- quadratic
-        -- cubic
-        -- quartic
-        -- quintic
-        -- circular
-        -- sine
-        easing = 'cubic'
-      })
-    end
-  }, ]]
-
   -- TPope: il papa
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-surround', -- tools to mess with surrounding brackets/quotes/etc
 
   -- snacks
   {

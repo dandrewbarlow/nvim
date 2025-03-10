@@ -18,6 +18,7 @@ vim.keymap.set('n', '<Tab>', '<cmd>:BufferLineCycleNext<CR>')
 -- previous buffer
 vim.keymap.set('n', '<S-Tab>', '<cmd>:BufferLineCyclePrev<CR>')
 
+
 -- TELESCOPE (FIND) COMMANDS --------------------------------------------------
 
 -- file finding
@@ -174,6 +175,71 @@ vim.keymap.set('n', '<leader>e', function()
   end,
   { desc = "[E]xplorer" }
 );
+
+-- SESSION MANAGEMENT ---------------------------------------------------
+-- Kinda a pain to set up but at least I'm learning some lua
+
+local function check_sessions()
+  local session_list = {}
+  local i = 1
+
+  for key, _ in pairs(MiniSessions.detected) do
+    session_list[i] = key
+    i = i+1
+  end
+
+  if #session_list ~= 0 then
+    return true
+  else
+    vim.notify("No Sessions Detected", vim.log.levels.WARN)
+    return false
+  end
+end
+
+-- save session
+vim.keymap.set(
+  'n',
+  '<leader>zs',
+  function ()
+    vim.ui.input({
+        prompt="Enter Session Name",
+        default = vim.fn.getcwd(),
+      },
+
+      function (input)
+        if (input ~= "") then
+          MiniSessions.write(input)
+        end
+      end
+    )
+
+  end,
+  {desc="Save Session"}
+)
+
+-- load session
+vim.keymap.set(
+  'n',
+  '<leader>zl',
+  function ()
+    if check_sessions() then
+      MiniSessions.select("read")
+    end
+  end,
+  {desc="Load Session"}
+)
+
+-- delete sessions
+vim.keymap.set(
+  'n',
+  '<leader>zd',
+  function ()
+    if check_sessions() then
+      MiniSessions.select("delete")
+    end
+  end,
+  {desc="Delete Session"}
+)
 
 
 -- REGULAR KEYMAPS --------------------------------------------------
