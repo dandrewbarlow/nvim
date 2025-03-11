@@ -26,7 +26,7 @@ return {
       {"<leader>r", group = '[R]un'},
       {"<leader>o", group = '[O]pen'},
       {"<leader>w", group = '[W]indow'},
-      {"<leader>z", group = 'Session'},
+      {"<leader>s", group = '[S]ession'},
     },
   },
 

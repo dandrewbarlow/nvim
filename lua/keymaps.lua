@@ -3,6 +3,12 @@
 
 local map = require('helpers.keys').map
 
+-- KEY DELETION --------------------------------------------------
+
+-- conflicts with my surround plugin, don't really use this anyway
+-- TODO: see if there is a way to disable the timeout that's still messing w/ surround mappings without implementing globally
+map('n', 's', "<Nop>", "")
+
 -- LEADER SHORTCUTS --------------------------------------------------
 ----------------------------------------------------------------------
 
@@ -209,7 +215,7 @@ end
 -- save session
 map(
   'n',
-  '<leader>zs',
+  '<leader>ss',
   function ()
     vim.ui.input({
         prompt="Enter Session Name",
@@ -230,7 +236,7 @@ map(
 -- load session
 map(
   'n',
-  '<leader>zl',
+  '<leader>sl',
   function ()
     if check_sessions() then
       MiniSessions.select("read")
@@ -242,7 +248,7 @@ map(
 -- delete sessions
 map(
   'n',
-  '<leader>zd',
+  '<leader>sd',
   function ()
     if check_sessions() then
       MiniSessions.select("delete")
@@ -270,6 +276,8 @@ map({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
 -- quit
 map('n', '<leader>q', '<cmd>:q<CR>', "[Q]uit")
 
+-- go to last cursor position
+map('n', 'gl', '``', "last position")
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows

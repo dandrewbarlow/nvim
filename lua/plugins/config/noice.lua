@@ -30,6 +30,19 @@ return {
 
     config = function ()
       require('noice').setup({
+
+        presets = {
+          bottom_search = true,
+          command_palette = true,
+        },
+        cmdline = {
+          format = {
+            help = { icon = '󰘥' },
+            filter = { icon = '' },
+            cmdline = { icon = '' },
+          },
+        },
+
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
           override = {

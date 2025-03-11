@@ -32,24 +32,33 @@ vim.opt.rtp:prepend(lazypath)
 -- LSP --------------------------------------------------
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
+    local map = require('helpers.keys').map
 
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+    if client == nil then
+      return
+    end
+
     if client.supports_method('textDocument/rename') then
       -- Rename var keymap
-      vim.keymap.set('n', '<leader>lr', '<CMD> lua vim.lsp.buf.rename()<CR>', {desc ="Rename"})
+      map('n', '<leader>lr', '<CMD> lua vim.lsp.buf.rename()<CR>', "Rename")
     end
 
     if client.supports_method('textDocument/implementation') then
       -- Create a keymap for vim.lsp.buf.implementation
-      vim.keymap.set('n', '<leader>li', '<CMD> lua vim.lsp.buf.implementation()<CR>', {desc ="Implementation"})
+      map('n', '<leader>li', '<CMD> lua vim.lsp.buf.implementation()<CR>', "Implementation")
     end
 
+    if client.supports_method('textDocument/definition') then
+      map('n', '<leader>ld', '<CMD> lua vim.lsp.buf.definition()<CR>', "Definition")
+      map('n', 'gd', '<CMD> lua vim.lsp.buf.definition()<CR>', "Definition")
+    end
     -- code action
-    vim.keymap.set('n', '<leader>la', '<CMD> lua vim.lsp.buf.code_action()<CR>', {desc ="Code Action"})
+    map('n', '<leader>la', '<CMD> lua vim.lsp.buf.code_action()<CR>', "Code Action")
 
     -- show lsp info
-    vim.keymap.set('n', '<leader>li', '<CMD>LspInfo<CR>', {desc="LSP Info"})
+    map('n', '<leader>li', '<CMD>LspInfo<CR>', "LSP Info")
   end,
 })
 
