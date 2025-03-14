@@ -29,8 +29,7 @@ M.opts = {
       {"<leader>s", group = '[S]ession'},
       {"<leader>w", group = '[W]indow'},
     },
-  },
-}
+  }
 
 M.config = function(_, opts)
   local wk = require('which-key')
