@@ -1,6 +1,23 @@
 -- Alpha: Startup dashboard
 -- Customized to add session support
 
+local header = {
+[[          ___   ____                    ]],
+[[        /' --;^/ ,-_\     \ | /                    ]],
+[[       / / --o\ o-\ \\   --(_)--                    ]],
+[[      /-/-/|o|-|\-\\|\\   / | \                    ]],
+[[       '`  ` |-|   `` '                    ]],
+[[             |-|                    ]],
+[[             |-|O                    ]],
+[[             |-(\,__                    ]],
+[[          ...|-|\--,\_....                    ]],
+[[      ,;;;;;;;;;;;;;;;;;;;;;;;;,.                    ]],
+[[~~,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                    ]],
+[[~;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,  ______   ---------   _____     ------                    ]]
+}
+
+-- let me go back to default header easily
+local replace_header = true
 
 return {
     'goolord/alpha-nvim',
@@ -29,40 +46,45 @@ return {
         -- access list of sessions
         local mini_sessions = require('mini.sessions')
         local session_list = mini_sessions.detected
-
-        -- sorter function, working with my custom array below and the MiniSessions.detected.modify_time property
-        local sorter = function(session_a, session_b)
-            return session_a[2].modify_time > session_b[2].modify_time
-        end
-
-        -- create a new list, holding the key, and value in their own array
-        local sorted_session_list = {}
-        for k, j in pairs(session_list) do
-            local el = {k, j}
-            table.insert(sorted_session_list, el)
-        end
-
-        -- sort the new list by most recently used
-        table.sort(sorted_session_list, sorter)
-
-        -- -- loop through session list, and insert new buttons for them into sessions_section
-
-        for index, value in ipairs(sorted_session_list) do
-
-            local button_map = "<leader>" .. tostring(index-1)
-            local button_text = "  " .. value[1]
-            local cmd_string = "<cmd>lua MiniSessions.read(\"" .. tostring(value[1]) .. "\")<CR>"
-
-            local button = dashboard.button(button_map, button_text, cmd_string)
-
-            table.insert(sessions_section.val, button)
-        end
-
         local custom_dash = theta
 
-        -- table.insert(custom_dash, 7, { type = "text", val = "Sessions", opts = { hl = "SpecialComment", position = "center" } })
-        -- table.insert(custom_dash.config.layout, { type = "padding, val = 2"})
-        table.insert(custom_dash.config.layout, 5, sessions_section)
+        if replace_header then
+            custom_dash.header.val = header
+        end
+
+        if next(session_list) ~= nil then
+
+            -- sorter function, working with my custom array below and the MiniSessions.detected.modify_time property
+            local sorter = function(session_a, session_b)
+                return session_a[2].modify_time > session_b[2].modify_time
+            end
+
+            -- create a new list, holding the key, and value in their own array
+            local sorted_session_list = {}
+            for k, j in pairs(session_list) do
+                local el = {k, j}
+                table.insert(sorted_session_list, el)
+            end
+
+            -- sort the new list by most recently used
+            table.sort(sorted_session_list, sorter)
+
+            -- -- loop through session list, and insert new buttons for them into sessions_section
+
+            for index, value in ipairs(sorted_session_list) do
+
+                local button_map = "<leader>" .. tostring(index-1)
+                local button_text = "  " .. value[1]
+                local cmd_string = "<cmd>lua MiniSessions.read(\"" .. tostring(value[1]) .. "\")<CR>"
+
+                local button = dashboard.button(button_map, button_text, cmd_string)
+
+                table.insert(sessions_section.val, button)
+            end
+
+
+            table.insert(custom_dash.config.layout, 5, sessions_section)
+        end
 
         alpha.setup(custom_dash.config)
     end

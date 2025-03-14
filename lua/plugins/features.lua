@@ -48,6 +48,20 @@ return {
     end
   },
 
+  {
+    "danymat/neogen",
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    -- version = "*" 
+  },
+
+  {
+    'luukvbaal/statuscol.nvim',
+    config = function()
+      require('statuscol').setup()
+    end
+  },
+
   { -- Comment: toggle line comments
     'numToStr/Comment.nvim', opts = {}, lazy = false,
     config = function()
@@ -66,12 +80,16 @@ return {
   },
 
   {
+    "kevinhwang91/nvim-bqf",
+    config = function ()
+      require('bqf').setup()
+    end
+  },
+
+  {
     "jiaoshijie/undotree",
     dependencies = "nvim-lua/plenary.nvim",
     config = true,
-    keys = { -- load the plugin only when using it's keybinding:
-      { "<leader>ou", "<cmd>lua require('undotree').toggle()<cr>" },
-    },
   },
 
   {

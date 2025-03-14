@@ -64,6 +64,9 @@ map('n', '<leader>rl', '<cmd>OverseerLoadBundle<CR>', "[L]oad Bundle")
 -- overseer action
 map('n', '<leader>ra', '<cmd>OverseerQuickAction<CR>', "[A]ction")
 
+-- CREATE COMMANDS --------------------------------------------------
+map('n', '<leader>cd', '<cmd>Neogen<CR>', '[D]ocumentation')
+
 -- OPEN COMANDS --------------------------------------------------
 
 -- Show todo's in a quick-fix panel
@@ -82,6 +85,8 @@ map('n', '<leader>ol', "<cmd>Trouble loclist toggle<cr>", "[L]ocation List" )
 map('n', '<leader>om', "<cmd>Markview<cr>", "[M]arkdown Preview Toggle" )
 -- show overseer
 map('n', '<leader>oo', "<cmd>OverseerToggle<cr>", "[O]verseer" )
+-- show undotree
+map('n', "<leader>ou", "<cmd>lua require('undotree').toggle()<cr>", "[U]ndoTree" )
 
 -- DEBUG COMMANDS --------------------------------------------------
 -- debug toggle UI
@@ -149,7 +154,7 @@ map('n', '<leader>mN', '<Plug>(Marks-prev)<CR>', "Previous" )
 -- see toggleterm in plugins/features.lua
 -- term mappings
 
-map('t', '<esc>', "<C-\\><C-n>", "")
+map('t', '<esc><esc>', "<C-\\><C-n>", "")
 map('t', '<C-h>', "<Cmd>wincmd h<CR>", "")
 map('t', '<C-j>', "<Cmd>wincmd j<CR>", "")
 map('t', '<C-k>', "<Cmd>wincmd k<CR>", "")
