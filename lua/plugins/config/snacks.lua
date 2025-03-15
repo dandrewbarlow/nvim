@@ -5,16 +5,18 @@ local M = {}
 
 ---@type snacks.Config
 M.opts = {
-  input = enabled,
-  image = enabled,
-  indent = enabled,
-  rename = enabled,
-  scope = enabled,
-  picker = enabled,
   animate = enabled,
   bigfile = enabled,
+  image = enabled,
+  indent = enabled,
+  input = enabled,
+  picker = enabled,
   quickfile = enabled,
-  ---
+  rename = enabled,
+  scope = enabled,
+  statuscolumn = enabled,
+
+  --- Scroll: animated scrolling
   ---@class snacks.scroll.Config
   ---@field animate snacks.animate.Config|{}
   ---@field animate_repeat snacks.animate.Config|{}|{delay:number}
@@ -24,6 +26,10 @@ M.opts = {
       easing = "outCubic"
     }
   },
+
+  -- toggle: add some toggling sugar to which-key;
+  -- think setup may not be worth it atm, doesn't seem plug & play
+  -- toggle = enabled,
 }
 
 M.init = function ()

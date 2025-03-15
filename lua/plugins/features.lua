@@ -55,13 +55,6 @@ return {
     -- version = "*" 
   },
 
-  {
-    'luukvbaal/statuscol.nvim',
-    config = function()
-      require('statuscol').setup()
-    end
-  },
-
   { -- Comment: toggle line comments
     'numToStr/Comment.nvim', opts = {}, lazy = false,
     config = function()
