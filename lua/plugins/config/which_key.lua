@@ -15,7 +15,7 @@ M.opts = {
 
   -- prefix names
   groups = {
-    {"<leader>a", group = '[A]esthetics'},
+    {"<leader>a", group = '[A]rtificial Intelligence'},
     {"<leader>b", group = '[B]uffer'},
     {"<leader>c", group = '[C]reate'},
     {"<leader>d", group = '[D]ebug'},
