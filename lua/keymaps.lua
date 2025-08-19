@@ -87,6 +87,10 @@ map('n', '<leader>om', "<cmd>Markview<cr>", "[M]arkdown Preview Toggle" )
 map('n', '<leader>oo', "<cmd>OverseerToggle<cr>", "[O]verseer" )
 -- show undotree
 map('n', "<leader>ou", "<cmd>lua require('undotree').toggle()<cr>", "[U]ndoTree" )
+-- colorscheme
+map('n', '<leader>oc', '<cmd>:Telescope colorscheme<CR>', "[C]olorschemes" )
+-- zen mode
+map('n', '<leader>oz', '<cmd>:ZenMode<CR>', "[Z]en" )
 
 -- DEBUG COMMANDS --------------------------------------------------
 -- debug toggle UI
@@ -125,12 +129,6 @@ end, "[s]copes")
 map('n', '<leader>gs', '<cmd>:Neogit<CR>', "[S]tatus" )
 map('n', '<leader>ga', '<cmd>:Neogit add .<CR>', "[A]dd ." )
 
--- AESTHETIC COMMANDS --------------------------------------------------
-
--- colorscheme
-map('n', '<leader>ac', '<cmd>:Telescope colorscheme<CR>', "[C]olorschemes" )
--- zen mode
-map('n', '<leader>az', '<cmd>:ZenMode<CR>', "[Z]en" )
 
 -- PLUGIN MANAGEMENT --------------------------------------------------
 -- mason --------------------------------------------------

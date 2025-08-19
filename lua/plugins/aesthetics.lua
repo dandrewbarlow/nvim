@@ -31,14 +31,27 @@ return {
   -- alpha startup
   require('plugins.config.alpha'),
 
+  {
+    "OxY2DEV/markview.nvim",
+    lazy = false,
+    -- following config from: https://github.com/yetone/avante.nvim/issues/175#issuecomment-2313749363
+    -- to set up correctly with Avante
+    opts = {
+      preview = {
+        filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
+      },
+      max_length = 99999,
+    },
+  },
+
   { --TreeSitter: syntax highlighting
     -- https://github.com/nvim-treesitter/nvim-treesitter
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    dependencies = "OxY2DEV/markview.nvim",
     config = function()
       require('nvim-treesitter').setup {
-        ensure_installed = { 'c', 'lua', 'vim', 'markdown', 'markdown_inline', 'javascript', },
-
+        ensure_installed = { 'c', 'cpp', 'lua', 'vim', 'markdown', 'markdown_inline', 'javascript', },
         auto_install = true
       }
     end
@@ -79,11 +92,6 @@ return {
   { -- zen-mode: cozy editing experience
     "folke/zen-mode.nvim",
     opts = {}
-  },
-
-  {
-    "OxY2DEV/markview.nvim",
-    lazy = false
   },
 
   -- lualine status bar
