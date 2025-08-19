@@ -49,9 +49,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     dependencies = "OxY2DEV/markview.nvim",
+    priority = 1000,
     config = function()
       require('nvim-treesitter').setup {
-        ensure_installed = { 'c', 'cpp', 'lua', 'vim', 'markdown', 'markdown_inline', 'javascript', },
+        ensure_installed = { 'bash', 'c', 'cpp', 'lua', 'vim', 'markdown', 'markdown_inline', 'javascript', },
         auto_install = true
       }
     end
