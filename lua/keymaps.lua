@@ -291,6 +291,9 @@ map('n', '<C-l>', '<C-w><C-l>', 'Move focus to the right window' )
 map('n', '<C-j>', '<C-w><C-j>', 'Move focus to the lower window' )
 map('n', '<C-k>', '<C-w><C-k>', 'Move focus to the upper window' )
 
+-- override shortcut for window changing in terminal mode to keep muscle memory
+map('t', '<C-l>', '<C-l>', 'Clear Terminal' )
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
