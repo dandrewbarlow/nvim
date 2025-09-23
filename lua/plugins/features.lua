@@ -13,6 +13,15 @@ return {
     end
   },
 
+  {
+    'RaafatTurki/hex.nvim',
+    config = function()
+      require('hex').setup {
+        dump_cmd = 'xxd -g 1 -u -b'
+      }
+    end
+  },
+
   { -- Autopairs: automatically add complements of characters that come in
     -- pairs
     'windwp/nvim-autopairs',
@@ -83,20 +92,6 @@ return {
     "jiaoshijie/undotree",
     dependencies = "nvim-lua/plenary.nvim",
     config = true,
-  },
-
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    opts = {},
-    config = function ()
-      require('toggleterm').setup({
-        hide_numbers = true,
-        open_mapping = "<C-P>",
-        insert_mappings = true,
-        terminal_mappings = true,
-      })
-    end
   },
 
   require('plugins.config.mini'),
