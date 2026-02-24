@@ -1,7 +1,7 @@
 
 return {
   { -- Telescope: unlock the power of fuzzy finding
-    'nvim-telescope/telescope.nvim', tag = '0.1.8',
+    'nvim-telescope/telescope.nvim', version = '0.2.1',
     requires = require('plugins.config.telescope').requires,
     config = require('plugins.config.telescope').config,
   },
