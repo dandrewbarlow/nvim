@@ -22,7 +22,6 @@ return {
 
   { "sainnhe/gruvbox-material", name="gruvbox", priority=1000 },
 
-
   { "shaunsingh/nord.nvim", name="nord", priority=1000},
 
 
@@ -31,6 +30,7 @@ return {
   -- alpha startup
   require('plugins.config.alpha'),
 
+  -- markview: markdown rendering in neovim
   {
     "OxY2DEV/markview.nvim",
     lazy = false,

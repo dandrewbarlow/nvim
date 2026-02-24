@@ -24,7 +24,12 @@ M.opts = {
     enabled=true,
     animate = {
       easing = "outCubic"
-    }
+    },
+      -- what buffers to animate
+    filter = function(buf)
+      -- had some issues with this library on help buffers
+      return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= "terminal" and vim.bo.buftype ~= "help"
+    end,
   },
 
   -- toggle: add some toggling sugar to which-key;
