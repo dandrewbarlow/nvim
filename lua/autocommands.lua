@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<leader>la', '<CMD> lua vim.lsp.buf.code_action()<CR>', "Code Action")
 
     -- show lsp info
-    map('n', '<leader>li', '<CMD>LspInfo<CR>', "LSP Info")
+    map('n', '<leader>lI', '<CMD>LspInfo<CR>', "LSP Info")
   end,
 })
 

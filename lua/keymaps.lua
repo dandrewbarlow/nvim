@@ -149,7 +149,12 @@ map('n', '<leader>mN', '<Plug>(Marks-prev)<CR>', "Previous" )
 
 -- TERMINAL --------------------------------------------------
 
--- see toggleterm in plugins/features.lua
+-- see toggleterm in plugins/terminal.lua
+
+-- floating center term
+map({'n', 'i', 't'}, '<C-p>', '<cmd>1 ToggleTerm size=15 direction=horizontal name=terminal<CR>', "Spawn horizontal terminal")
+map({'n', 'i', 't'}, '<C-Space>', '<cmd>2 ToggleTerm size=60 direction=float<CR>', "Spawn floating terminal")
+
 -- term mappings
 
 map('t', '<esc><esc>', "<C-\\><C-n>", "")

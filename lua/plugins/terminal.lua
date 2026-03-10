@@ -8,7 +8,7 @@ return {
     config = function ()
       require('toggleterm').setup({
         hide_numbers = true,
-        open_mapping = "<C-P>",
+        -- open_mapping = "<C-P>",
         insert_mappings = true,
         terminal_mappings = true,
       })

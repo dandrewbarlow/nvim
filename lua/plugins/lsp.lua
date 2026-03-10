@@ -30,18 +30,12 @@ return {
               -- Load luvit types when the `vim.uv` word is found
               { path = "${3rd}/luv/library", words = { "vim%.uv" } },
               -- love2d game library
-              { path = os.getenv("HOME") .. ".local/share/LuaAddons/love2d/library", words = { "love" } }
+              { path = os.getenv("HOME") .. "/.local/share/LuaAddons/love2d/library", words = { "love" } },
+              "nvim-dap-ui",
             },
           },
         },
     },
-    config = function()
-      require('lazydev').setup({
-        library = {
-          'nvim-dap-ui',
-        },
-      })
-    end
   },
 
   { -- Mason: LSP manager

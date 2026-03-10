@@ -19,10 +19,10 @@ local handlers = {
         settings = {
           Lua = {
             library = {
-              {os.getenv("HOME") .. ".local/share/LuaAddons/love2d/library"}
+              {os.getenv("HOME") .. "/.local/share/LuaAddons/love2d/library"}
             },
             workspace = {
-              userThirdParty = {os.getenv("HOME") .. ".local/share/LuaAddons"},
+              userThirdParty = {os.getenv("HOME") .. "/.local/share/LuaAddons"},
               checkThirdParty = "Apply"
             }
           }

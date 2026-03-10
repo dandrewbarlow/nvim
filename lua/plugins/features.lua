@@ -13,7 +13,7 @@ return {
     end
   },
 
-  {
+  { -- for working with binary/hex data
     'RaafatTurki/hex.nvim',
     config = function()
       require('hex').setup {
@@ -81,6 +81,7 @@ return {
     end
   },
 
+  --- better quickfix menu
   {
     "kevinhwang91/nvim-bqf",
     config = function ()
@@ -88,6 +89,7 @@ return {
     end
   },
 
+  --- make undo commands more complicated
   {
     "jiaoshijie/undotree",
     dependencies = "nvim-lua/plenary.nvim",
