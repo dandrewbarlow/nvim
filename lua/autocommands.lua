@@ -70,17 +70,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    if client.supports_method('textDocument/rename') then
+    if client:supports_method('textDocument/rename') then
       -- Rename var keymap
       map('n', '<leader>lr', '<CMD> lua vim.lsp.buf.rename()<CR>', "Rename")
     end
 
-    if client.supports_method('textDocument/implementation') then
+    if client:supports_method('textDocument/implementation') then
       -- Create a keymap for vim.lsp.buf.implementation
       map('n', '<leader>li', '<CMD> lua vim.lsp.buf.implementation()<CR>', "Implementation")
     end
 
-    if client.supports_method('textDocument/definition') then
+    if client:supports_method('textDocument/definition') then
       map('n', '<leader>ld', '<CMD> lua vim.lsp.buf.definition()<CR>', "Definition")
       map('n', 'gd', '<CMD> lua vim.lsp.buf.definition()<CR>', "Definition")
     end
