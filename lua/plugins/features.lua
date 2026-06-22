@@ -57,6 +57,10 @@ return {
     end
   },
 
+  { -- swapdiff: diff view of swapfile changes for more helpful recovery
+    'trippwill/swapdiff.nvim',
+  },
+
   {
     "danymat/neogen",
     config = true,
