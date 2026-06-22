@@ -47,6 +47,7 @@ return {
   { --TreeSitter: syntax highlighting
     -- https://github.com/nvim-treesitter/nvim-treesitter
     "nvim-treesitter/nvim-treesitter",
+    branch = "main", -- master branch is frozen; main supports Neovim 0.10+
     build = ":TSUpdate",
     dependencies = "OxY2DEV/markview.nvim",
     priority = 1000,
