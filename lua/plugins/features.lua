@@ -68,23 +68,6 @@ return {
     -- version = "*" 
   },
 
-  { -- Comment: toggle line comments
-    'numToStr/Comment.nvim', opts = {}, lazy = false,
-    config = function()
-      -- custome comment toggling shortcuts 
-      require('Comment').setup({
-        toggler = {
-          line = '<leader>/',
-          block = '<leader>;',
-        },
-        opleader = {
-          line = '<leader>/',
-          block = '<leader>;',
-        },
-      })
-    end
-  },
-
   --- better quickfix menu
   {
     "kevinhwang91/nvim-bqf",
