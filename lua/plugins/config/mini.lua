@@ -5,7 +5,7 @@ return {
 
   { -- mini.splitjoin: easily split args into multiple lines, or join into one
     -- default map: 'gS' to toggle
-    'echasnovski/mini.splitjoin',
+    'nvim-mini/mini.splitjoin',
     version = false,
     config = function ()
       require('mini.splitjoin').setup()
@@ -14,7 +14,7 @@ return {
 
   { -- mini.move: part of the mini.nvim library that allows you to easily move
     -- text around
-    'echasnovski/mini.move',
+    'nvim-mini/mini.move',
     version = false,
     config = function ()
       require('mini.move').setup()
@@ -22,7 +22,7 @@ return {
   },
 
   {
-    'echasnovski/mini.ai',
+    'nvim-mini/mini.ai',
     version = false,
     config = function ()
       require('mini.ai').setup()
@@ -30,7 +30,7 @@ return {
   },
 
   {
-    'echasnovski/mini.surround',
+    'nvim-mini/mini.surround',
     version = false,
     config = function ()
       require('mini.surround').setup()
@@ -38,7 +38,7 @@ return {
   },
 
   {
-    'echasnovski/mini.sessions',
+    'nvim-mini/mini.sessions',
     version = false,
     config = function ()
       require('mini.sessions').setup({
@@ -46,5 +46,18 @@ return {
       })
     end
   },
+
+  {
+    'nvim-mini/mini.comment',
+    version = false,
+    config = function() 
+      require('mini.comment').setup({
+        mappings = {
+          comment_line = '<leader>/',
+          comment_visual = '<leader>/'
+        }
+      })
+    end
+  }
 
 }
