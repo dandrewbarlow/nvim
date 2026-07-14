@@ -38,9 +38,14 @@ return {
 
   config = function()
 
+    -- only auto-install servers whose required toolchains exist on this
+    -- machine; the rest are skipped (with a warning) instead of erroring out
+    local ensure_installed = require('helpers.tooling')
+      .installable(require('plugins.config.lsp').lsp_list)
+
     require("mason-lspconfig").setup {
       automatic_installation = false,
-      ensure_installed =  require('plugins.config.lsp').lsp_list,
+      ensure_installed = ensure_installed,
       handlers = handlers
     }
 

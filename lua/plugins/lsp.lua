@@ -47,12 +47,18 @@ return {
     config = function()
       require('mason').setup()
 
-      -- TODO: automatic DAP/LSP/Formatter installation
+      local tooling = require('helpers.tooling')
+
+      -- auto-install formatters whose toolchains exist on this machine
+      tooling.mason_install(
+        tooling.installable(require('plugins.config.lsp').formatter_list)
+      )
+
       local dap_list = require('plugins.config.dap').dap_list
 
-      -- BUG: no automatic DAP installation
+      -- only auto-install adapters whose required toolchains exist here
       require('mason-nvim-dap').setup({
-        ensure_installed = dap_list,
+        ensure_installed = tooling.installable(dap_list),
         -- TODO: inspect if further config neccessary
         handlers = {
           function (config)
