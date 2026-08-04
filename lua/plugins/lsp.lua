@@ -36,6 +36,13 @@ return {
           },
         },
     },
+    config = function()
+      -- servers with no mason package are enabled here instead, gated on
+      -- their binary so a machine without the toolchain just skips them
+      require('helpers.tooling').enable_manual(
+        require('plugins.config.lsp').manual_lsp_list
+      )
+    end,
   },
 
   { -- Mason: LSP manager

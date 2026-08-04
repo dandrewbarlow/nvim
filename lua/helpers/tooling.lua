@@ -35,14 +35,54 @@ M.requires = {
   glslls = { "cmake", "cc" },
 }
 
--- true only when every executable in `execs` is on $PATH
-local function have(execs)
-  for _, exe in ipairs(execs) do
-    if vim.fn.executable(exe) == 0 then
+-- true only when every entry in `execs` resolves. An entry may be a bare name
+-- (looked up on $PATH) or a path -- vim.fn.executable handles both, so a tool
+-- installed outside $PATH can still be detected. A nested list means "any of
+-- these will do", e.g. { { "cl-lsp", "~/.roswell/bin/cl-lsp" } }.
+function M.have(execs)
+  for _, entry in ipairs(execs) do
+    local alternatives = type(entry) == "table" and entry or { entry }
+    local found = false
+
+    for _, exe in ipairs(alternatives) do
+      if vim.fn.executable(vim.fn.expand(exe)) == 1 then
+        found = true
+        break
+      end
+    end
+
+    if not found then
       return false
     end
   end
+
   return true
+end
+
+local have = M.have
+
+-- Report the entries we passed over, once, so it's obvious why a tool didn't
+-- show up (and what to install to fix it).
+local function notify_skipped(reason, skipped)
+  if #skipped > 0 then
+    vim.notify(
+      reason .. ":\n" .. table.concat(skipped, "\n"),
+      vim.log.levels.WARN,
+      { title = "tooling" }
+    )
+  end
+end
+
+-- Format one skipped entry the same way everywhere. Nested "any of" entries
+-- (see M.have) are rendered as "a or b".
+local function skip_entry(name, reqs)
+  local parts = {}
+
+  for _, entry in ipairs(reqs) do
+    table.insert(parts, type(entry) == "table" and table.concat(entry, " or ") or entry)
+  end
+
+  return "  " .. name .. " (needs: " .. table.concat(parts, ", ") .. ")"
 end
 
 -- Return the subset of `list` whose toolchain requirements are satisfied.
@@ -56,19 +96,33 @@ function M.installable(list)
     if not reqs or have(reqs) then
       table.insert(ok, name)
     else
-      table.insert(skipped, "  " .. name .. " (needs: " .. table.concat(reqs, ", ") .. ")")
+      table.insert(skipped, skip_entry(name, reqs))
     end
   end
 
-  if #skipped > 0 then
-    vim.notify(
-      "mason: skipping auto-install (missing toolchains):\n" .. table.concat(skipped, "\n"),
-      vim.log.levels.WARN,
-      { title = "tooling" }
-    )
-  end
+  notify_skipped("mason: skipping auto-install (missing toolchains)", skipped)
 
   return ok
+end
+
+-- Enable language servers that mason has no package for, so they're installed
+-- by hand and may simply be absent on another machine. Same gate as
+-- M.installable, but the payoff is `vim.lsp.enable` instead of an install list.
+--
+-- `list` entries are { name = <lsp config name>, requires = { <exec>, ... } },
+-- where the name matches an `lsp/<name>.lua` on the runtimepath.
+function M.enable_manual(list)
+  local skipped = {}
+
+  for _, server in ipairs(list) do
+    if have(server.requires) then
+      vim.lsp.enable(server.name)
+    else
+      table.insert(skipped, skip_entry(server.name, server.requires))
+    end
+  end
+
+  notify_skipped("lsp: skipping manually-installed servers (not found)", skipped)
 end
 
 -- Install the given mason packages if they aren't already installed.

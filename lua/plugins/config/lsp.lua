@@ -27,4 +27,13 @@ return {
     "prettier"
   },
 
+  -- servers mason has no package for. installed by hand, so they're gated on
+  -- their binary being present -- see helpers.tooling.enable_manual. `name`
+  -- must match an `lsp/<name>.lua` on the runtimepath.
+  manual_lsp_list = {
+    -- roswell doesn't put its bin dir on $PATH for GUI-launched nvim, so
+    -- accept either location -- cl_lsp.lua falls back to the same path
+    { name = "cl_lsp", requires = { { "cl-lsp", "~/.roswell/bin/cl-lsp" } } },
+  },
+
 }
