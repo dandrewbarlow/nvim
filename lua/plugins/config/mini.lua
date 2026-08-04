@@ -42,7 +42,8 @@ return {
     version = false,
     config = function ()
       require('mini.sessions').setup({
-        directory = vim.fn.stdpath "data" .. "/sessions/"
+        directory = vim.fn.stdpath "data" .. "/sessions/",
+        autowrite = false
       })
     end
   },

@@ -227,7 +227,7 @@ map(
   function ()
     vim.ui.input({
         prompt="Enter Session Name",
-        default = vim.fn.getcwd(),
+        default = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
       },
 
       function (input)
