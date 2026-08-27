@@ -5,5 +5,10 @@ return {
     dependencies = require('plugins.config.cmp').dependencies,
     config = require('plugins.config.cmp').config,
 
-  }
+  },
+
+  -- lisp
+
+  -- easy parentheses infer
+  {"gpanders/nvim-parinfer"},
 }
