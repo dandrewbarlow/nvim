@@ -49,6 +49,22 @@ return {
   },
 
   {
+    'nvim-mini/mini.bufremove',
+    version = false,
+    config = function() 
+      require('mini.bufremove').setup()
+    end
+  },
+
+  {
+    'nvim-mini/mini.basics',
+    version = false,
+    config = function()
+      require('mini.basics').setup()
+    end
+  },
+
+  {
     'nvim-mini/mini.comment',
     version = false,
     config = function() 
