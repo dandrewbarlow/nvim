@@ -83,6 +83,8 @@ return {
     config = true,
   },
 
+  -- MINI plugins
   require('plugins.config.mini'),
+
 
 }

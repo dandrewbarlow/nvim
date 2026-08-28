@@ -7,8 +7,4 @@ return {
 
   },
 
-  -- lisp
-
-  -- easy parentheses infer
-  {"gpanders/nvim-parinfer"},
 }
