@@ -62,7 +62,10 @@ vim.opt.rtp:prepend(lazypath)
 -- LSP --------------------------------------------------
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
-    local map = require('helpers.keys').map
+    -- lsp_map scopes these to the attached buffer. plain map() would set them
+    -- globally, so they'd follow you into buffers with no LSP -- and shadow
+    -- conjure, which shares the <leader>l prefix (see plugins/config/lisp.lua).
+    local lsp_map = require('helpers.keys').lsp_map
 
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
@@ -72,23 +75,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if client:supports_method('textDocument/rename') then
       -- Rename var keymap
-      map('n', '<leader>lr', '<CMD> lua vim.lsp.buf.rename()<CR>', "Rename")
+      lsp_map('<leader>lr', '<CMD> lua vim.lsp.buf.rename()<CR>', args.buf, "Rename")
     end
 
     if client:supports_method('textDocument/implementation') then
       -- Create a keymap for vim.lsp.buf.implementation
-      map('n', '<leader>li', '<CMD> lua vim.lsp.buf.implementation()<CR>', "Implementation")
+      lsp_map('<leader>li', '<CMD> lua vim.lsp.buf.implementation()<CR>', args.buf, "Implementation")
     end
 
     if client:supports_method('textDocument/definition') then
-      map('n', '<leader>ld', '<CMD> lua vim.lsp.buf.definition()<CR>', "Definition")
-      map('n', 'gd', '<CMD> lua vim.lsp.buf.definition()<CR>', "Definition")
+      lsp_map('<leader>ld', '<CMD> lua vim.lsp.buf.definition()<CR>', args.buf, "Definition")
+      lsp_map('gd', '<CMD> lua vim.lsp.buf.definition()<CR>', args.buf, "Definition")
     end
     -- code action
-    map('n', '<leader>la', '<CMD> lua vim.lsp.buf.code_action()<CR>', "Code Action")
+    lsp_map('<leader>la', '<CMD> lua vim.lsp.buf.code_action()<CR>', args.buf, "Code Action")
 
     -- show lsp info
-    map('n', '<leader>lI', '<CMD>LspInfo<CR>', "LSP Info")
+    lsp_map('<leader>lI', '<CMD>LspInfo<CR>', args.buf, "LSP Info")
   end,
 })
 
