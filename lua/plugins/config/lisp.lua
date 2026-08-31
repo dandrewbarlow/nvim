@@ -13,10 +13,11 @@ return {
   -- strictly more (live image introspection, not just static analysis). So we
   -- talk to Swank directly rather than pretending it's an LSP.
   --
-  -- Both servers start themselves -- see helpers/repl.lua. Opening a .lisp or
-  -- .scm buffer spawns one as a child of nvim, so it dies with nvim rather than
-  -- lingering as a daemon, and anything already listening is reused instead.
-  -- <leader>Lcc reconnects by hand if a server is restarted mid-session.
+  -- Neither language needs a REPL started by hand. Scheme is stdio, so conjure
+  -- spawns chicken itself; common lisp needs a swank server, which
+  -- helpers/swank.lua starts as a child of nvim on the first .lisp buffer (and
+  -- reuses anything already listening). Both die with nvim, no daemons.
+  -- <leader>lcc reconnects by hand if a server is restarted mid-session.
   {
     "Olical/conjure",
     ft = { "lisp", "clojure", "fennel", "scheme", "racket", "janet" },
@@ -47,16 +48,19 @@ return {
       vim.g["conjure#completion#omnifunc"] = false
 
       -- conjure's scheme client defaults to mit-scheme, which is effectively
-      -- unmaintained and won't install here, so use guile.
+      -- unmaintained and won't install here, so run chicken over stdio.
       --
-      -- NOTE: this has to be the *socket* client, not scheme.stdio with
-      -- command="guile". scheme.stdio is written around mit-scheme's output and
-      -- unconditionally strips a trailing integer from every result
-      -- (client/scheme/stdio.lua, the "%s+%d+%s*$" gsub in format-msg). guile
-      -- answers "$1 = 3", so that gsub eats the 3 and you get "$1 =" back. no
-      -- amount of prompt/value pattern config can recover it.
-      vim.g["conjure#filetype#scheme"] = "conjure.client.guile.socket"
-      vim.g["conjure#client#guile#socket#pipename"] = require("helpers.repl").guile.config.pipename
+      -- NOTE: the binary is chicken-csi, NOT the "csi" the conjure wiki names.
+      -- dotnet-sdk also ships a /usr/bin/csi (the C# interactive compiler) and
+      -- it wins on $PATH here, so plain "csi" starts the wrong repl entirely.
+      --
+      -- chicken prints values bare on their own line, so there's no value
+      -- prefix to strip -- false disables that step. the prompt counts up
+      -- (#;1>, #;2> ...) and doesn't advance on error.
+      vim.g["conjure#filetype#scheme"] = "conjure.client.scheme.stdio"
+      vim.g["conjure#client#scheme#stdio#command"] = "chicken-csi -:c"
+      vim.g["conjure#client#scheme#stdio#prompt_pattern"] = "\n?#;%d+> "
+      vim.g["conjure#client#scheme#stdio#value_prefix_pattern"] = false
     end,
 
     config = function()
@@ -74,72 +78,65 @@ return {
         }
       )
 
-      -- guile returns *unspecified* for define/display/set! and friends, so
-      -- conjure has no value to report and renders the inline result as
-      -- "; Empty result". while writing scheme most top-level forms are
-      -- defines, so that's noise on nearly every eval. drop the inline mark
-      -- when there's no value -- the log still gets the printed output, which
-      -- never reaches on-result anyway (parse-guile-result sends stray output
-      -- straight to the log).
+      -- conjure's scheme client carries one more mit-scheme-ism: format-msg
+      -- strips a trailing integer off every result (the "%s+%d+%s*$" gsub in
+      -- client/scheme/stdio.lua). with chicken that silently eats the value
+      -- whenever output ends in a newline before it --
+      --   (begin (display "x") (newline) 42)
+      -- logs "x" and loses the 42 from both the log and the inline result.
+      -- swap in the same logic without the destructive strip. assumes
+      -- value_prefix_pattern is false, which it is (set above).
       local patched = false
-      local function quiet_empty_guile_results()
+      local function fix_scheme_results()
         if patched then
           return
         end
 
-        local ok, client = pcall(require, "conjure.client.guile.socket")
-        if not ok or type(client["eval-str"]) ~= "function" then
+        local ok, client = pcall(require, "conjure.client.scheme.stdio")
+        if not ok or type(client["format-msg"]) ~= "function" then
           return
         end
         patched = true
 
-        local eval_str = client["eval-str"]
-        client["eval-str"] = function(opts)
-          local on_result = opts["on-result"]
-          if on_result then
-            opts["on-result"] = function(result)
-              if result and result:find("Empty result", 1, true) then
-                return
-              end
-              return on_result(result)
+        client["format-msg"] = function(msg)
+          local out = string.gsub(msg and msg.out or "", "^%s*", "")
+          local lines = {}
+          for _, line in ipairs(vim.split(out, "\n")) do
+            if line ~= "" then
+              table.insert(lines, line)
             end
           end
-          return eval_str(opts)
+          return lines
         end
       end
 
-      -- start the REPL servers on demand, so opening a file is all it takes
-      local repl = require("helpers.repl")
-      local servers = { lisp = repl.swank, scheme = repl.guile }
+      -- start swank on demand, so opening a .lisp file is all it takes
+      local swank = require("helpers.swank")
 
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "lisp", "scheme" },
         callback = function(args)
           local ft = vim.bo[args.buf].filetype
           if ft == "scheme" then
-            quiet_empty_guile_results()
-          end
-          local server = servers[ft]
-          if server then
-            server.ensure()
+            fix_scheme_results()
+          elseif ft == "lisp" then
+            swank.ensure()
           end
         end,
-        desc = "start/attach a REPL server for conjure",
+        desc = "prepare the REPL for conjure",
       })
 
       vim.api.nvim_create_autocmd("VimLeavePre", {
-        callback = function() repl.stop_all() end,
-        desc = "tear down any REPL servers nvim started",
+        callback = function() swank.stop() end,
+        desc = "tear down the swank server nvim started",
       })
 
       -- lazy loads this plugin *on* FileType, so the autocmd above misses the
       -- buffer that triggered the load
       if vim.bo.filetype == "scheme" then
-        quiet_empty_guile_results()
-      end
-      local current = servers[vim.bo.filetype]
-      if current then
-        current.ensure()
+        fix_scheme_results()
+      elseif vim.bo.filetype == "lisp" then
+        swank.ensure()
       end
     end,
   },
