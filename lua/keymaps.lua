@@ -18,6 +18,8 @@ map('n', 's', "<Nop>", "")
 map('n', '<leader>bd', '<cmd>:bd<cr>', "[D]elete buffer")
 -- kill tab
 map('n', '<leader>bk', '<cmd>:bd!<cr>', "[k]ill buffer")
+-- close tab
+map('n', '<leader>br', '<cmd>:e<cr>', "[R]efresh buffer")
 -- create new tab
 map('n', '<leader>bn', '<cmd>:tabnew<CR>', "[N]ew Buffer")
 -- next buffer
