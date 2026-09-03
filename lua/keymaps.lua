@@ -283,6 +283,9 @@ map('n', '<C-.>', '<CMD>vertical resize +1<CR>', "decrease window width")
 -- Save buffer
 map({'n', 'i', 'v'}, '<C-s>', '<cmd>:w<CR>')
 
+-- Return to normal mode
+map({'i'}, '<C-l>', '<Esc>')
+
 -- quit
 map('n', '<leader>q', '<cmd>:q<CR>', "[Q]uit")
 
