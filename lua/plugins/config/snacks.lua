@@ -11,6 +11,7 @@ M.opts = {
   indent = enabled,
   input = enabled,
   picker = enabled,
+  lazygit = enabled,
   quickfile = enabled,
   rename = enabled,
   scope = enabled,

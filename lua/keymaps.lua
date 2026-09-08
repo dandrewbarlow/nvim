@@ -131,6 +131,8 @@ end, "[s]copes")
 map('n', '<leader>gs', '<cmd>:Neogit<CR>', "[S]tatus" )
 map('n', '<leader>ga', '<cmd>:Neogit add .<CR>', "[A]dd ." )
 
+map('n', '<leader>gl', function() Snacks.lazygit.open() end, "[L]azy [G]it")
+
 
 -- PLUGIN MANAGEMENT --------------------------------------------------
 -- mason --------------------------------------------------
