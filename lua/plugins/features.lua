@@ -83,6 +83,10 @@ return {
     config = true,
   },
 
+  {
+    url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+  },
+
   -- MINI plugins
   require('plugins.config.mini'),
 
