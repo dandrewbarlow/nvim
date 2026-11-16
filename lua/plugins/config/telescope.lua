@@ -19,11 +19,20 @@ M.config = function()
       opts = { nowait = true, silent = true }
     },
 
-    ["<C-k>"] = { 
+    ["<C-k>"] = {
       actions.move_selection_previous,
       type = "action",
       opts = { nowait = true, silent = true }
-    }
+    },
+
+    -- clear the prompt (overrides default preview scroll up)
+    ["<C-u>"] = function(prompt_bufnr)
+      require('telescope.actions.state').get_current_picker(prompt_bufnr):reset_prompt()
+    end,
+
+    -- scroll preview (overrides default <C-f> preview scroll left)
+    ["<C-f>"] = actions.preview_scrolling_down,
+    ["<C-b>"] = actions.preview_scrolling_up,
   }
 
   require('telescope').setup {
